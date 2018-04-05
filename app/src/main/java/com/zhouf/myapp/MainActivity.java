@@ -14,10 +14,9 @@ public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "Main";
 
-    private final static int MAX = 35;
+    private final static int MAX = 33;
 
     EditText num1,num2,num3,num4,num5,num6;
-    Integer[] items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,29 +38,16 @@ public class MainActivity extends AppCompatActivity {
         num6.addTextChangedListener(new MyWatcher(num6));
 
         //for test
-        num1.setText("01,02,03,04,05");
-        num2.setText("03,04,05,06");
-        num3.setText("06,07,08,15");
+        num1.setText("1,2,3,4,5");
+        num2.setText("3,4,5,6");
+        num3.setText("6,7,8,15");
         num4.setText("21,22,23,30");
         num5.setText("25");
 
-        List<Integer> list = new ArrayList<Integer>();
-        for (int i=0;i<=MAX;i++){
-            //list.add(String.format("%02d",i));
-            list.add(i);
-            Log.d(TAG, "onCreate: 00->" + String.format("%02d",i));
-        }
-        items = list.toArray(new Integer[]{});
-
-    }
-
-    public void textClick(View text) {
-        Log.i(TAG, "textClick: ");
 
 
     }
 
-    
     public void onStartClick(View btn){
         Log.i(TAG, "onStartClick: ");
 
@@ -114,16 +100,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Integer[] getArray(EditText text){
-        Integer array[];
+
+        List<Integer> list = new ArrayList<>();
         if(text.getText().toString().length()==0){
-            array = items;
-        }else{
-            List<Integer> lst = new ArrayList<>();
-            for(String s : text.getText().toString().split(",")){
-                lst.add(Integer.valueOf(s));
+            for (int i=0;i<=MAX;i++){
+                list.add(i);
             }
-            array = lst.toArray(new Integer[]{});
+        }else{
+            for(String s : text.getText().toString().split(",")){
+                list.add(Integer.valueOf(s));
+            }
         }
-        return array;
+        return list.toArray(new Integer[]{});
     }
 }
