@@ -19,34 +19,45 @@
     <EditText
         android:id="@+id/num1"
         android:hint="@string/text_hint"
-        android:onClick="textClick"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/num2"
         android:hint="@string/text_hint"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/num3"
         android:hint="@string/text_hint"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/num4"
         android:hint="@string/text_hint"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/num5"
         android:hint="@string/text_hint"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/num6"
         android:hint="@string/text_hint"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/chk_saved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ck_label" />
 
     <Button
         android:id="@+id/btn_start"
