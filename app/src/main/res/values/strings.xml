@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">算一下</string>
+    <string name="title">请依次设置六位组合数</string>
+    <string name="text_hint">请输入数字，并用逗号分隔</string>
+    <string name="btn_start_label">开始组合</string>
+    <string name="btn_ok">确定</string>
+</resources>
