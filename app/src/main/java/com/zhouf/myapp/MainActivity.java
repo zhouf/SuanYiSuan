@@ -1,11 +1,15 @@
 package com.zhouf.myapp;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,49 +20,74 @@ public class MainActivity extends AppCompatActivity {
 
     private final static int MAX = 33;
 
-    EditText num1,num2,num3,num4,num5,num6;
+    EditText num[] = new EditText[6];
+    CheckBox saved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        num1 = findViewById(R.id.num1);
-        num2 = findViewById(R.id.num2);
-        num3 = findViewById(R.id.num3);
-        num4 = findViewById(R.id.num4);
-        num5 = findViewById(R.id.num5);
-        num6 = findViewById(R.id.num6);
-
-        num1.addTextChangedListener(new MyWatcher(num1));
-        num2.addTextChangedListener(new MyWatcher(num2));
-        num3.addTextChangedListener(new MyWatcher(num3));
-        num4.addTextChangedListener(new MyWatcher(num4));
-        num5.addTextChangedListener(new MyWatcher(num5));
-        num6.addTextChangedListener(new MyWatcher(num6));
-
-        //for test
-        num1.setText("1,2,3,4,5");
-        num2.setText("3,4,5,6");
-        num3.setText("6,7,8,15");
-        num4.setText("21,22,23,30");
-        num5.setText("25");
+        num[0] = findViewById(R.id.num1);
+        num[1] = findViewById(R.id.num2);
+        num[2] = findViewById(R.id.num3);
+        num[3] = findViewById(R.id.num4);
+        num[4] = findViewById(R.id.num5);
+        num[5] = findViewById(R.id.num6);
+        saved = findViewById(R.id.chk_saved);
 
 
+        //填入保存数据
+        SharedPreferences sp = getSharedPreferences("mydata", Activity.MODE_PRIVATE);
+
+
+
+        //*
+
+        for(int i=0;i<6;i++) {
+            String str = sp.getString("str"+i, "");
+            Log.i(TAG, "onCreate: str" + i + "=" + str);
+            if(str.length()>0){
+                num[i].setText(str);
+            }
+        }
+
+        /*/
+
+        num[0].setText("1,2,3,4,5");
+        num[1].setText("3,4,5,6");
+        num[2].setText("6,7,8,15");
+        num[3].setText("21,22,23,30");
+        num[4].setText("25");
+        //*/
 
     }
 
     public void onStartClick(View btn){
         Log.i(TAG, "onStartClick: ");
+        //检查输入数据是否合法
+        String regex = "[0-9|,]+";
+        for(int i=0;i<6;i++) {
+            String str = num[i].getText().toString();
+            if(str.length()>0 && !str.matches(regex)){
+                //不满足条件
+                Toast.makeText(this, "第"+(i+1)+"位输入不合法，请检查", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+
+        
+        //是否保存数据
+        saveData();
 
         Integer[] a1,a2,a3,a4,a5,a6;
 
-        a1 = getArray(num1);
-        a2 = getArray(num2);
-        a3 = getArray(num3);
-        a4 = getArray(num4);
-        a5 = getArray(num5);
-        a6 = getArray(num6);
+        a1 = getArray(num[0]);
+        a2 = getArray(num[1]);
+        a3 = getArray(num[2]);
+        a4 = getArray(num[3]);
+        a5 = getArray(num[4]);
+        a6 = getArray(num[5]);
         int counter = 1;
 
         ArrayList<String> listData = new ArrayList<>();
@@ -96,6 +125,25 @@ public class MainActivity extends AppCompatActivity {
         Intent listIntent = new Intent(this,MyListActivity.class);
         listIntent.putStringArrayListExtra("data",listData);
         startActivity(listIntent);
+    }
+
+    private void saveData() {
+        SharedPreferences mySharedPreferences = getSharedPreferences("mydata", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        if(saved.isChecked()){
+            Log.i(TAG, "onStartClick: 保存数据");
+            editor.clear();
+            for(int i=0;i<6;i++) {
+                editor.putString("str"+i,num[i].getText().toString());
+            }
+            editor.commit();
+            Log.i(TAG, "saveData: 数据写入成功");
+        }else{
+            Log.i(TAG, "onStartClick: 清理保存数据");
+            editor.clear();
+            editor.commit();
+            Log.i(TAG, "saveData: 数据清理完毕");
+        }
     }
 
 
