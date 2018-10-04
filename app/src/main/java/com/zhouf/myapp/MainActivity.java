@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText num[] = new EditText[3];
     Spinner select[] = new Spinner[3];
+    Spinner s[] = new Spinner[4];
     CheckBox saved;
 
     @Override
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         select[0] = findViewById(R.id.spinner1);
         select[1] = findViewById(R.id.spinner2);
         select[2] = findViewById(R.id.spinner3);
+
+        s[0] = findViewById(R.id.s1);
+        s[1] = findViewById(R.id.s2);
+        s[2] = findViewById(R.id.s3);
+        s[3] = findViewById(R.id.s4);
 
         saved = findViewById(R.id.chk_saved);
 
