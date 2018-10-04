@@ -16,42 +16,147 @@
         android:gravity="center"
         android:text="@string/title"/>
 
-    <EditText
-        android:id="@+id/num1"
-        android:hint="@string/text_hint"
-        android:inputType="text"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/num2"
-        android:hint="@string/text_hint"
-        android:inputType="text"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/num1"
+            android:hint="@string/text_hint"
+            android:inputType="text"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:entries="@array/spinnerdata"
+            android:spinnerMode="dropdown" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/num3"
-        android:hint="@string/text_hint"
-        android:inputType="text"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/num2"
+            android:hint="@string/text_hint"
+            android:inputType="text"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:entries="@array/spinnerdata"
+            android:spinnerMode="dropdown" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/num4"
-        android:hint="@string/text_hint"
-        android:inputType="text"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/num3"
+            android:hint="@string/text_hint"
+            android:inputType="text"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:entries="@array/spinnerdata"
+            android:spinnerMode="dropdown" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/num5"
-        android:hint="@string/text_hint"
-        android:inputType="text"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="end"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="@string/s1_label"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s1"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:entries="@array/spinnerdata"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:gravity="end"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="@string/s2_label"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s2"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:entries="@array/spinnerdata"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/num6"
-        android:hint="@string/text_hint"
-        android:inputType="text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="end"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="@string/s3_label"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s3"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:entries="@array/spinnerdata"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:gravity="end"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="@string/s4_label"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s4"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:entries="@array/spinnerdata"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/chk_saved"

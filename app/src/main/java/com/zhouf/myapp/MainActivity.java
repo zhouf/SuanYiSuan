@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final static int MAX = 33;
 
-    EditText num[] = new EditText[6];
+    EditText num[] = new EditText[3];
+    Spinner select[] = new Spinner[3];
     CheckBox saved;
 
     @Override
@@ -31,18 +33,19 @@ public class MainActivity extends AppCompatActivity {
         num[0] = findViewById(R.id.num1);
         num[1] = findViewById(R.id.num2);
         num[2] = findViewById(R.id.num3);
-        num[3] = findViewById(R.id.num4);
-        num[4] = findViewById(R.id.num5);
-        num[5] = findViewById(R.id.num6);
+
+        select[0] = findViewById(R.id.spinner1);
+        select[1] = findViewById(R.id.spinner2);
+        select[2] = findViewById(R.id.spinner3);
+
         saved = findViewById(R.id.chk_saved);
 
 
         //填入保存数据
-        SharedPreferences sp = getSharedPreferences("mydata", Activity.MODE_PRIVATE);
+        //SharedPreferences sp = getSharedPreferences("mydata", Activity.MODE_PRIVATE);
 
 
-
-        //*
+        /*
 
         for(int i=0;i<6;i++) {
             String str = sp.getString("str"+i, "");
@@ -54,11 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
         /*/
 
-        num[0].setText("1,2,3,4,5");
-        num[1].setText("3,4,5,6");
-        num[2].setText("6,7,8,15");
-        num[3].setText("21,22,23,30");
-        num[4].setText("25");
+        num[0].setText("1,2,3,5");
+        num[1].setText("13,14,16");
+        num[2].setText("22,25,28,31");
         //*/
 
     }
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "onStartClick: ");
         //检查输入数据是否合法
         String regex = "[0-9|,]+";
-        for(int i=0;i<6;i++) {
+        for(int i=0;i<3;i++) {
             String str = num[i].getText().toString();
             if(str.length()>0 && !str.matches(regex)){
                 //不满足条件
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         
         //是否保存数据
-        saveData();
+        //saveData();
 
         Integer[] a1,a2,a3,a4,a5,a6;
 

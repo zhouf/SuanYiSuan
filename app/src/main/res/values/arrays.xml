@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerdata">
+        <item>1个</item>
+        <item>2个</item>
+        <item>3个</item>
+    </string-array>
+</resources>
