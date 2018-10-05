@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         //填入保存数据
-        //SharedPreferences sp = getSharedPreferences("mydata", Activity.MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("mydata", Activity.MODE_PRIVATE);
 
 
-        /*
+        //*
 
         for(int i=0;i<3;i++) {
             String str = sp.getString("str"+i, "");
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //是否保存数据
-        //saveData();
+        saveData();
 
         ArrayList<String> lista = getArrayList(num[0],select[0]);
         ArrayList<String> listb = getArrayList(num[1],select[1]);
