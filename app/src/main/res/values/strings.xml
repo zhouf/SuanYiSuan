@@ -4,9 +4,11 @@
     <string name="text_hint">请输入数字，并用逗号分隔</string>
     <string name="btn_start_label">开始组合</string>
     <string name="btn_ok">确定</string>
+    <string name="match_label">精确匹配如下规则</string>
     <string name="ck_label">保留当前输入供下次使用</string>
     <string name="s1_label">单</string>
     <string name="s2_label">双</string>
     <string name="s3_label">质</string>
     <string name="s4_label">合</string>
+    <string name="no_data_tip">无符合条件的数据</string>
 </resources>

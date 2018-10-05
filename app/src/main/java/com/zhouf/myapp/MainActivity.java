@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     EditText num[] = new EditText[3];
     Spinner select[] = new Spinner[3];
     Spinner s[] = new Spinner[4];
-    CheckBox saved;
+    CheckBox matchType,saved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         s[2] = findViewById(R.id.s3);
         s[3] = findViewById(R.id.s4);
 
+        for(int i=0;i<4;i++)
+            s[i].setSelection(3);
+
+        matchType = findViewById(R.id.chk_match);
         saved = findViewById(R.id.chk_saved);
 
 
@@ -53,17 +57,20 @@ public class MainActivity extends AppCompatActivity {
 
         /*
 
-        for(int i=0;i<6;i++) {
+        for(int i=0;i<3;i++) {
             String str = sp.getString("str"+i, "");
             Log.i(TAG, "onCreate: str" + i + "=" + str);
             if(str.length()>0){
                 num[i].setText(str);
             }
+
+            int position = sp.getInt("position" + i,0);
+            select[i].setSelection(position);
         }
 
         /*/
 
-        num[0].setText("1,2,3,5");
+        num[0].setText("1,2,3,5,9");
         num[1].setText("13,14,16");
         num[2].setText("22,25,28,31");
         //*/
@@ -72,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStartClick(View btn){
         Log.i(TAG, "onStartClick: ");
+        Log.i(TAG, "s0" + s[0].getSelectedItemPosition());
+        Log.i(TAG, "s0" + s[0].getSelectedItem());
+        Log.i(TAG, "s0" + s[0].getSelectedItemId());
+
+
         //检查输入数据是否合法
         String regex = "[0-9|,]+";
         for(int i=0;i<3;i++) {
@@ -83,55 +95,59 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        
         //是否保存数据
         //saveData();
 
-        Integer[] a1,a2,a3,a4,a5,a6;
-
-        a1 = getArray(num[0]);
-        a2 = getArray(num[1]);
-        a3 = getArray(num[2]);
-        a4 = getArray(num[3]);
-        a5 = getArray(num[4]);
-        a6 = getArray(num[5]);
-        int counter = 1;
+        ArrayList<String> lista = getArrayList(num[0],select[0]);
+        ArrayList<String> listb = getArrayList(num[1],select[1]);
+        ArrayList<String> listc = getArrayList(num[2],select[2]);
 
         ArrayList<String> listData = new ArrayList<>();
-        for(int i1 : a1){
-            for(int i2 : a2){
-                if(i1<i2)
-                for(int i3 : a3){
-                    if(i2<i3)
-                    for(int i4 : a4){
-                        if(i3<i4)
-                        for(int i5 : a5){
-                            if(i4<i5)
-                            for(int i6 : a6){
-                                if(i5<i6){
-                                    Log.i(TAG, "["+(counter)+"]i1~i6=" + i1 + "," + i2 + "," + i3 + "," + i4 + "," + i5 + "," + i6);
-                                    StringBuilder sb = new StringBuilder();
-                                    //sb.append("[").append(counter).append("] ");
-                                    sb.append(String.format("%02d",i1)).append(" - ");
-                                    sb.append(String.format("%02d",i2)).append(" - ");
-                                    sb.append(String.format("%02d",i3)).append(" - ");
-                                    sb.append(String.format("%02d",i4)).append(" - ");
-                                    sb.append(String.format("%02d",i5)).append(" - ");
-                                    sb.append(String.format("%02d",i6));
-                                    listData.add(sb.toString());
-                                    counter++;
-                                }
-                            }
-                        }
-                    }
+        for(String stra : lista){
+            for(String strb : listb){
+                for(String strc : listc){
+                    StringBuilder builder = new StringBuilder();
+                    builder.append(stra).append(strb).append(strc);
+                    builder.deleteCharAt(builder.lastIndexOf(","));
+                    listData.add(builder.toString());
                 }
             }
         }
-        //end for
 
-        Intent listIntent = new Intent(this,MyListActivity.class);
-        listIntent.putStringArrayListExtra("data",listData);
-        startActivity(listIntent);
+        int dan = s[0].getSelectedItemPosition() + 1;
+        int suang = s[1].getSelectedItemPosition() + 1;
+        int zhi = s[2].getSelectedItemPosition() + 1;
+        int he = s[3].getSelectedItemPosition() + 1;
+
+        boolean eqType = matchType.isChecked();
+        Log.i(TAG, "onStartClick: list.length=" + listData.size());
+        NumUtil.filterData(listData,dan,suang,zhi,he,eqType);
+
+        Log.i(TAG, "onStartClick: list.length2=" + listData.size());
+
+        if(listData.size()==0){
+            Toast.makeText(this, R.string.no_data_tip, Toast.LENGTH_LONG).show();
+        }else {
+            Intent listIntent = new Intent(this, MyListActivity.class);
+            listIntent.putStringArrayListExtra("data", listData);
+            startActivity(listIntent);
+        }
+    }
+
+
+    /**
+     * 返回列表集合
+     * @param editText 输入的文本控件
+     * @param spinner 下拉列表，选用多少个数据
+     * @return 返回从文本中自由组合的符合下拉列表个数的集合
+     */
+    private ArrayList<String> getArrayList(EditText editText, Spinner spinner) {
+        //ArrayList<Integer> retList = new ArrayList<Integer>();
+        String str = editText.getText().toString();
+        int limit = spinner.getSelectedItemPosition();  //0,1,2
+        ArrayList<String> resultList = NumUtil.getList(str,limit+1);
+
+        return resultList;
     }
 
     private void saveData() {
@@ -140,8 +156,9 @@ public class MainActivity extends AppCompatActivity {
         if(saved.isChecked()){
             Log.i(TAG, "onStartClick: 保存数据");
             editor.clear();
-            for(int i=0;i<6;i++) {
+            for(int i=0;i<3;i++) {
                 editor.putString("str"+i,num[i].getText().toString());
+                editor.putInt("position" + i ,select[i].getSelectedItemPosition());
             }
             editor.commit();
             Log.i(TAG, "saveData: 数据写入成功");
