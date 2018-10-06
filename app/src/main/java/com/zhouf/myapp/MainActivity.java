@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         s[2] = findViewById(R.id.s3);
         s[3] = findViewById(R.id.s4);
 
+        for(int i=0;i<3;i++)
+            select[i].setSelection(1);
+
         for(int i=0;i<4;i++)
             s[i].setSelection(3);
 
@@ -53,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
         //填入保存数据
         SharedPreferences sp = getSharedPreferences("mydata", Activity.MODE_PRIVATE);
+        matchType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                matchType.setText(b? R.string.match_label : R.string.match_label2);
+            }
+        });
 
 
         //*
@@ -64,15 +74,15 @@ public class MainActivity extends AppCompatActivity {
                 num[i].setText(str);
             }
 
-            int position = sp.getInt("position" + i,0);
+            int position = sp.getInt("position" + i,1);
             select[i].setSelection(position);
         }
 
         /*/
 
-        num[0].setText("1,2,3,5,9");
-        num[1].setText("13,14,16");
-        num[2].setText("22,25,28,31");
+        num[0].setText("1 2 3 5 9");
+        num[1].setText("13 14 16");
+        num[2].setText("22 25 28 31");
         //*/
 
     }
@@ -85,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //检查输入数据是否合法
-        String regex = "[0-9|,]+";
+        String regex = "[0-9|, ]+";
         for(int i=0;i<3;i++) {
             String str = num[i].getText().toString();
             if(str.length()>0 && !str.matches(regex)){

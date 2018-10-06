@@ -133,12 +133,41 @@ public class NumUtil {
     }
 
     /**
+     * 获取组合数
+     * @param str 原始字符串
+     * @param n 几位数，小于等于3
+     * @return
+     */
+    public static ArrayList<String> getList(String str, int n) {
+        ArrayList<String> retList = new ArrayList<String>();
+        String a[] = str.replaceAll(" ",",").split(",");
+        int len = a.length;
+        for(int i1 = 0 ; i1<=len-n ; i1++){
+            if(n==1){
+                retList.add(String.valueOf(a[i1]).concat(","));
+            }else{
+                for(int i2=i1+1;i2<=len-n+1;i2++){
+                    if(n==2){
+                        retList.add(a[i1] + "," + a[i2] + ",");
+                    }else{
+                        for(int i3=i2+1;i3<len;i3++){
+                            retList.add(a[i1] + "," + a[i2] + "," + a[i3] + ",");
+                        }
+                    }
+                }
+            }
+        }
+        return retList;
+    }
+
+    /**
      * 返回组合结果的字符串集合
      * @param str 原始字符串
      * @param n 选取个数
      * @return 字符串集合
      */
-    public static ArrayList<String> getList(String str, int n) {
+    @Deprecated
+    public static ArrayList<String> getList1(String str, int n) {
         List<Integer> arr = new ArrayList<Integer>();
         for(String ss : str.split(",")){
             arr.add(Integer.parseInt(ss));
