@@ -6,15 +6,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText num[] = new EditText[3];
     Spinner select[] = new Spinner[3];
-    Spinner s[] = new Spinner[4];
-    CheckBox matchType,saved;
+    CheckBox saved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,30 +39,16 @@ public class MainActivity extends AppCompatActivity {
         select[1] = findViewById(R.id.spinner2);
         select[2] = findViewById(R.id.spinner3);
 
-        s[0] = findViewById(R.id.s1);
-        s[1] = findViewById(R.id.s2);
-        s[2] = findViewById(R.id.s3);
-        s[3] = findViewById(R.id.s4);
 
         for(int i=0;i<3;i++)
             select[i].setSelection(1);
 
-        for(int i=0;i<4;i++)
-            s[i].setSelection(3);
 
-        matchType = findViewById(R.id.chk_match);
         saved = findViewById(R.id.chk_saved);
 
 
         //填入保存数据
         SharedPreferences sp = getSharedPreferences("mydata", Activity.MODE_PRIVATE);
-        matchType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                matchType.setText(b? R.string.match_label : R.string.match_label2);
-            }
-        });
-
 
         //*
 
@@ -87,11 +72,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.config_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.config){
+            //进入配置页面
+            Intent settingIntent = new Intent(this,SettingsActivity.class);
+            startActivity(settingIntent);
+        }
+        return true;
+    }
+
     public void onStartClick(View btn){
         Log.i(TAG, "onStartClick: ");
-        Log.i(TAG, "s0" + s[0].getSelectedItemPosition());
-        Log.i(TAG, "s0" + s[0].getSelectedItem());
-        Log.i(TAG, "s0" + s[0].getSelectedItemId());
 
 
         //检查输入数据是否合法
@@ -124,14 +122,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        int dan = s[0].getSelectedItemPosition() + 1;
-        int suang = s[1].getSelectedItemPosition() + 1;
-        int zhi = s[2].getSelectedItemPosition() + 1;
-        int he = s[3].getSelectedItemPosition() + 1;
-
-        boolean eqType = matchType.isChecked();
         Log.i(TAG, "onStartClick: list.length=" + listData.size());
-        NumUtil.filterData(listData,dan,suang,zhi,he,eqType);
+        //NumUtil.filterData(listData,dan,suang,zhi,he,eqType);
 
         Log.i(TAG, "onStartClick: list.length2=" + listData.size());
 
@@ -180,19 +172,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    private Integer[] getArray(EditText text){
-
-        List<Integer> list = new ArrayList<>();
-        if(text.getText().toString().length()==0){
-            for (int i=0;i<=MAX;i++){
-                list.add(i);
-            }
-        }else{
-            for(String s : text.getText().toString().split(",")){
-                list.add(Integer.valueOf(s));
-            }
-        }
-        return list.toArray(new Integer[]{});
-    }
 }

@@ -12,4 +12,14 @@
     <string name="s3_label">质</string>
     <string name="s4_label">合</string>
     <string name="no_data_tip">无符合条件的数据</string>
+    <string name="settings_menu_item">设置</string>
+    <string name="settings_title">条件设置</string>
+    <string name="settings_item_match_label">使用规则</string>
+    <string name="settings_item_match_less">小于如下设置</string>
+    <string name="settings_item_match_equals">等于如下设置</string>
+    <string name="settings_item_dan_label">单数</string>
+    <string name="settings_item_suang_label">双数</string>
+    <string name="settings_item_zhi_label">质数</string>
+    <string name="settings_item_he_label">合数</string>
+    <string name="settings_item_enable_label">是否使用规则</string>
 </resources>

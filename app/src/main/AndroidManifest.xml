@@ -18,7 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyListActivity"></activity>
+        <activity android:name=".MyListActivity" />
+        <activity android:name=".SettingsActivity"
+            android:label="@string/settings_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.zhouf.myapp.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>
