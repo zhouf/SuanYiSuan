@@ -54,6 +54,9 @@ public class SettingsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.settings_main);
             new PrefListener("match_type");
             new PrefListener("dan");
+            new PrefListener("suang");
+            new PrefListener("zhi");
+            new PrefListener("he");
         }
     }
 }

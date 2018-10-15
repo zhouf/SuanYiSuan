@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     EditText num[] = new EditText[3];
     Spinner select[] = new Spinner[3];
     CheckBox saved;
+    int dan,suang,zhi,he;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +43,31 @@ public class MainActivity extends AppCompatActivity {
         select[2] = findViewById(R.id.spinner3);
 
 
+
         for(int i=0;i<3;i++)
             select[i].setSelection(1);
 
 
         saved = findViewById(R.id.chk_saved);
 
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean useConfig = sharedPrefs.getBoolean("use_setting",false);
+        String matchType = sharedPrefs.getString("match_type","");
+        Log.i(TAG, "onCreate: kkkk=" + getString(R.string.settings_item_dan_key));
+        dan = sharedPrefs.getInt(getString(R.string.settings_item_dan_key),0);
+        suang = sharedPrefs.getInt(getString(R.string.settings_item_suang_key),0);
+        zhi = sharedPrefs.getInt(getString(R.string.settings_item_zhi_key),0);
+        he = sharedPrefs.getInt(getString(R.string.settings_item_he_key),0);
+        Log.i(TAG, "onCreate: useConfig=" + useConfig);
+
+        TextView configTip = findViewById(R.id.config_tip);
+        if(useConfig){
+            configTip.setText("使用过滤条件，" + matchType + "(单"+dan+"，双"+suang+"，质"+zhi+"，合"+he+")");
+            configTip.setVisibility(View.VISIBLE);
+        }else{
+            configTip.setVisibility(View.GONE);
+        }
 
         //填入保存数据
         SharedPreferences sp = getSharedPreferences("mydata", Activity.MODE_PRIVATE);

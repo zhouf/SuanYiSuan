@@ -4,8 +4,6 @@
     <string name="text_hint">请输入，用逗号或空格分隔</string>
     <string name="btn_start_label">开始组合</string>
     <string name="btn_ok">确定</string>
-    <string name="match_label">精确匹配如下规则</string>
-    <string name="match_label2">小于等于如下规则</string>
     <string name="ck_label">保留当前输入供下次使用</string>
     <string name="s1_label">单</string>
     <string name="s2_label">双</string>
@@ -15,11 +13,15 @@
     <string name="settings_menu_item">设置</string>
     <string name="settings_title">条件设置</string>
     <string name="settings_item_match_label">使用规则</string>
-    <string name="settings_item_match_less">小于如下设置</string>
-    <string name="settings_item_match_equals">等于如下设置</string>
-    <string name="settings_item_dan_label">单数</string>
-    <string name="settings_item_suang_label">双数</string>
-    <string name="settings_item_zhi_label">质数</string>
-    <string name="settings_item_he_label">合数</string>
+    <string name="settings_item_option_less">小于如下设置</string>
+    <string name="settings_item_option_equals">等于如下设置</string>
+    <string name="settings_item_dan_label">单数个数</string>
+    <string name="settings_item_suang_label">双数个数</string>
+    <string name="settings_item_zhi_label">质数个数</string>
+    <string name="settings_item_he_label">合数个数</string>
     <string name="settings_item_enable_label">是否使用规则</string>
+    <string name="settings_item_dan_key">dan</string>
+    <string name="settings_item_suang_key">suang</string>
+    <string name="settings_item_zhi_key">zhi</string>
+    <string name="settings_item_he_key">he</string>
 </resources>

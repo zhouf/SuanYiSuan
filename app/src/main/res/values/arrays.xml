@@ -13,12 +13,12 @@
     </string-array>
 
     <string-array name="settings_order_by_labels">
-        <item>@string/settings_item_match_less</item>
-        <item>@string/settings_item_match_equals</item>
+        <item>@string/settings_item_option_less</item>
+        <item>@string/settings_item_option_equals</item>
     </string-array>
 
-    <string-array name="settings_order_by_values">
-        <item>less</item>
-        <item>equals</item>
-    </string-array>
+    <!--<string-array name="settings_order_by_values">
+        <item>@string/settings_item_option_less</item>
+        <item>@string/settings_item_option_equals</item>
+    </string-array>-->
 </resources>
