@@ -3,7 +3,6 @@ package com.zhouf.myapp;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -140,11 +139,23 @@ public class NumUtil {
      */
     public static ArrayList<String> getList(String str, int n) {
         ArrayList<String> retList = new ArrayList<String>();
+        if(n==0){
+            return retList;
+        }
         String a[] = str.replaceAll(" ",",").split(",");
         int len = a.length;
+
+        Log.i(TAG, "getList: n=" + n);
+        Log.i(TAG, "getList: len=" + len);
+        //如果选取的数大于数组长度，返回数组所有内容
+        if(n>len){
+            for(String s : a){
+                retList.add(s.concat(","));
+            }
+        }
         for(int i1 = 0 ; i1<=len-n ; i1++){
             if(n==1){
-                retList.add(String.valueOf(a[i1]).concat(","));
+                retList.add(a[i1].concat(","));
             }else{
                 for(int i2=i1+1;i2<=len-n+1;i2++){
                     if(n==2){
