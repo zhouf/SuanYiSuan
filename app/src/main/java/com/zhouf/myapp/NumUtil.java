@@ -17,30 +17,28 @@ public class NumUtil {
      * 根据设定参数对数据进行过滤
      * @param listData 数据集合
      * @param dan 单数
-     * @param suang 双数
      * @param zhi 质数
-     * @param he 合数
+     * @param less16 1-16个数
      * @param eqType 是否精确匹配
      */
-    public static void filterData(ArrayList<String> listData, int dan, int suang, int zhi, int he, boolean eqType) {
+    public static void filterData(ArrayList<String> listData, int dan, int zhi, int less16, boolean eqType) {
         ArrayList<String> removed = new ArrayList<String>();
         for(String str : listData){
             int[] array = toIntArray(str);
             int d = countDan(array);
-            int s = countSuang(array);
             int z = countZhi(array);
-            int h = countHe(array);
-            //Log.i(TAG, "filterData:"+str+" d["+d+"] s["+s+"] z["+z+"] h["+h+"]");
+            int less = countLess16(array);
+            //Log.i(TAG, "filterData:"+str+" d["+d+"] z["+z+"] less["+less+"]");
             if(eqType){
                 //精确匹配
-                if(d!=dan || s!=suang || z!=zhi || h!=he){
+                if(d!=dan || z!=zhi || less!=less16){
                     //加入待删除列表
                     removed.add(str);
                     //Log.i(TAG, "filterData: 移除");
                 }
             }else{
                 //不超过匹配
-                if(!(d<=dan && s<=suang && z<=zhi && h<=he)){
+                if(!(d<=dan && z<=zhi && less<=less16)){
                     //删除不符合条件的数据
                     removed.add(str);
                     //Log.i(TAG, "filterData: 移除");
@@ -67,21 +65,6 @@ public class NumUtil {
     }
 
     /**
-     * 统计双数元素个数
-     * @param array
-     * @return
-     */
-    private static int countSuang(int[] array) {
-        int ret = 0;
-        for(int i : array){
-            if(i%2==0){
-                ret++;
-            }
-        }
-        return ret;
-    }
-
-    /**
      * 统计质数
      * @param array
      * @return
@@ -96,14 +79,14 @@ public class NumUtil {
         return ret;
     }
     /**
-     * 统计合数
+     * 统计1-16个数
      * @param array
      * @return
      */
-    private static int countHe(int[] array){
+    private static int countLess16(int[] array){
         int ret = 0;
         for(int i : array){
-            if(i>=4 && !isPrime(i)){
+            if(i<=16){
                 ret++;
             }
         }

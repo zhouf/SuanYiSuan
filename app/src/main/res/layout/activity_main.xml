@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_weight="1"
-            android:entries="@array/spinnerdata"
+            android:entries="@array/spinnerdata5"
             android:spinnerMode="dropdown" />
 
     </LinearLayout>
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_weight="1"
-            android:entries="@array/spinnerdata"
+            android:entries="@array/spinnerdata3"
             android:spinnerMode="dropdown" />
 
     </LinearLayout>
@@ -80,7 +80,7 @@
             android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_weight="1"
-            android:entries="@array/spinnerdata"
+            android:entries="@array/spinnerdata3"
             android:spinnerMode="dropdown" />
 
     </LinearLayout>
@@ -103,7 +103,7 @@
             android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_weight="1"
-            android:entries="@array/spinnerdata"
+            android:entries="@array/spinnerdata3"
             android:spinnerMode="dropdown" />
 
     </LinearLayout>
@@ -127,7 +127,7 @@
             android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_weight="1"
-            android:entries="@array/spinnerdata"
+            android:entries="@array/spinnerdata3"
             android:spinnerMode="dropdown" />
 
     </LinearLayout>
@@ -151,7 +151,7 @@
             android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_weight="1"
-            android:entries="@array/spinnerdata"
+            android:entries="@array/spinnerdata3"
             android:spinnerMode="dropdown" />
 
     </LinearLayout>

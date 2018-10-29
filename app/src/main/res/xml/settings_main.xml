@@ -30,15 +30,6 @@
     <EditTextPreference
         android:defaultValue="3"
         android:inputType="number"
-        android:key="@string/settings_item_suang_key"
-        android:summary="当前值{v}"
-        android:selectAllOnFocus="true"
-        android:dependency="use_setting"
-        android:title="@string/settings_item_suang_label" />
-
-    <EditTextPreference
-        android:defaultValue="3"
-        android:inputType="number"
         android:key="@string/settings_item_zhi_key"
         android:summary="当前值{v}"
         android:selectAllOnFocus="true"
@@ -48,10 +39,10 @@
     <EditTextPreference
         android:defaultValue="3"
         android:inputType="number"
-        android:key="@string/settings_item_he_key"
+        android:key="@string/settings_item_less16_key"
         android:summary="当前值{v}"
         android:selectAllOnFocus="true"
         android:dependency="use_setting"
-        android:title="@string/settings_item_he_label" />
+        android:title="@string/settings_item_less16_label" />
 
 </PreferenceScreen>

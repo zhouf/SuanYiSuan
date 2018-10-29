@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     EditText num[] = new EditText[6];
     Spinner select[] = new Spinner[6];
     CheckBox saved;
-    int dan,suang,zhi,he;
+    int dan,zhi,less16;
     boolean eqType;
     SharedPreferences sharedPrefs;
 
@@ -55,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
         select[3] = findViewById(R.id.spinner4);
         select[4] = findViewById(R.id.spinner5);
         select[5] = findViewById(R.id.spinner6);
-        */
 
         for(int i=0;i<3;i++)
             select[i].setSelection(2);
+        */
 
         saved = findViewById(R.id.chk_saved);
 
@@ -67,14 +67,13 @@ public class MainActivity extends AppCompatActivity {
         String matchType = sharedPrefs.getString("match_type","");
 
         dan = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_dan_key),"0"));
-        suang = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_suang_key),"0"));
         zhi = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_zhi_key),"0"));
-        he = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_he_key),"0"));
+        less16 = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_less16_key),"0"));
         Log.i(TAG, "onCreate: useConfig=" + useConfig);
 
         TextView configTip = findViewById(R.id.config_tip);
         if(useConfig){
-            configTip.setText("使用过滤条件，" + matchType + "(单"+dan+"，双"+suang+"，质"+zhi+"，合"+he+")");
+            configTip.setText("使用过滤条件，" + matchType + "(单"+dan+"，质"+zhi+"，1~16:"+less16+")");
             configTip.setVisibility(View.VISIBLE);
         }else{
             configTip.setVisibility(View.GONE);
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("mydata", Activity.MODE_PRIVATE);
         //*
 
-        for(int i=0;i<3;i++) {
+        for(int i=0;i<6;i++) {
             String str = sp.getString("str"+i, "");
             Log.i(TAG, "onCreate: str" + i + "=" + str);
             if(str.length()>0){
@@ -168,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         if(useConfig){
             String matchType = sharedPrefs.getString("match_type","");
             eqType = getString(R.string.settings_item_option_equals).equals(matchType);
-            NumUtil.filterData(listData,dan,suang,zhi,he,eqType);
+            NumUtil.filterData(listData,dan,zhi,less16,eqType);
 
             Log.i(TAG, "onStartClick: 过滤后list.length2=" + listData.size());
         }
