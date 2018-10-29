@@ -18,4 +18,5 @@
     <string name="settings_item_dan_key">dan</string>
     <string name="settings_item_less16_key">less16</string>
     <string name="settings_item_zhi_key">zhi</string>
+    <string name="settings_unlimited">不限制</string>
 </resources>

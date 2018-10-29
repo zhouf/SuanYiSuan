@@ -31,14 +31,14 @@ public class NumUtil {
             //Log.i(TAG, "filterData:"+str+" d["+d+"] z["+z+"] less["+less+"]");
             if(eqType){
                 //精确匹配
-                if(d!=dan || z!=zhi || less!=less16){
+                if((dan>=0 && d!=dan) || (zhi>=0 && z!=zhi) || (less16>=0 && less!=less16)){
                     //加入待删除列表
                     removed.add(str);
                     //Log.i(TAG, "filterData: 移除");
                 }
             }else{
                 //不超过匹配
-                if(!(d<=dan && z<=zhi && less<=less16)){
+                if((dan>=0 && d>dan) || (zhi>=0 && z>zhi) || (less16>=0 && less>less16)){
                     //删除不符合条件的数据
                     removed.add(str);
                     //Log.i(TAG, "filterData: 移除");

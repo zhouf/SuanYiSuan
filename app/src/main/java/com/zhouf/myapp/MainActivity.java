@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
         //是否保存数据
         saveData();
+
         ArrayList<String> listData = new ArrayList<>();
         ArrayList<String> lista = getArrayList(num[0],select[0]);
         for (int i=1;i<6;i++){
@@ -231,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         if(saved.isChecked()){
             Log.i(TAG, "onStartClick: 保存数据");
             editor.clear();
-            for(int i=0;i<3;i++) {
+            for(int i=0;i<6;i++) {
                 editor.putString("str"+i,num[i].getText().toString());
                 editor.putInt("position" + i ,select[i].getSelectedItemPosition());
             }

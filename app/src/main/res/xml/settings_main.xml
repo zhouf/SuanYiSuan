@@ -18,30 +18,30 @@
         android:title="@string/settings_item_match_label" />
 
 
-    <EditTextPreference
+    <ListPreference
         android:defaultValue="3"
-        android:inputType="number"
+        android:entries="@array/settings_number_option_label"
+        android:entryValues="@array/settings_number_option_value"
         android:key="@string/settings_item_dan_key"
         android:summary="当前值{v}"
-        android:selectAllOnFocus="true"
         android:dependency="use_setting"
         android:title="@string/settings_item_dan_label" />
 
-    <EditTextPreference
+    <ListPreference
         android:defaultValue="3"
-        android:inputType="number"
+        android:entries="@array/settings_number_option_label"
+        android:entryValues="@array/settings_number_option_value"
         android:key="@string/settings_item_zhi_key"
         android:summary="当前值{v}"
-        android:selectAllOnFocus="true"
         android:dependency="use_setting"
         android:title="@string/settings_item_zhi_label" />
 
-    <EditTextPreference
+    <ListPreference
         android:defaultValue="3"
-        android:inputType="number"
+        android:entries="@array/settings_number_option_label"
+        android:entryValues="@array/settings_number_option_value"
         android:key="@string/settings_item_less16_key"
         android:summary="当前值{v}"
-        android:selectAllOnFocus="true"
         android:dependency="use_setting"
         android:title="@string/settings_item_less16_label" />
 
