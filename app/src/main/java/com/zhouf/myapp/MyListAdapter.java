@@ -2,6 +2,7 @@ package com.zhouf.myapp;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,9 @@ public class MyListAdapter extends ArrayAdapter {
         String str = (String)getItem(position);
         TextView title = (TextView) itemView.findViewById(R.id.listText);
         str = str.replaceAll(",,",",").replaceAll(",","-");
+        if(str.endsWith("-")){
+            str = str.substring(0,str.length()-1);
+        }
         title.setText(str);
 
         ImageView img = (ImageView)itemView.findViewById(R.id.itemImg);
@@ -40,6 +44,7 @@ public class MyListAdapter extends ArrayAdapter {
             public void onClick(View v) {
                 list.remove(position);
                 MyListAdapter.this.notifyDataSetChanged();
+                Log.i(TAG, "onClick: delete....");
             }
         });
 

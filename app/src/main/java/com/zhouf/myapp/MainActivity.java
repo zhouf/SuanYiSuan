@@ -221,6 +221,11 @@ public class MainActivity extends AppCompatActivity {
         //ArrayList<Integer> retList = new ArrayList<Integer>();
         String str = editText.getText().toString();
         int limit = spinner.getSelectedItemPosition();  //0,1,2
+        if(spinner.getAdapter().getCount()==5){
+            //如果是第一组5个元素，从1开始，下标需+1
+            limit++;
+        }
+        Log.i(TAG, "getArrayList: str=" + str + " limit=" + limit);
         ArrayList<String> resultList = NumUtil.getList(str,limit);
 
         return resultList;

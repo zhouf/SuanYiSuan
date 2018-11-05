@@ -122,7 +122,7 @@ public class NumUtil {
      */
     public static ArrayList<String> getList(String str, int n) {
         ArrayList<String> retList = new ArrayList<String>();
-        if(n==0){
+        if(n==0||str.length()==0){
             return retList;
         }
         String a[] = str.replaceAll(" ",",").split(",");
@@ -131,25 +131,43 @@ public class NumUtil {
         Log.i(TAG, "getList: n=" + n);
         Log.i(TAG, "getList: len=" + len);
         //如果选取的数大于数组长度，返回数组所有内容
-        if(n>len){
-            for(String s : a){
-                retList.add(s.concat(","));
+        if(n>=len){
+            //直接将所有数据按一项写入列表
+            String item = str.replaceAll(" ",",");
+            if(!item.endsWith(",")){
+                item = item.concat(",");
             }
-        }
-        for(int i1 = 0 ; i1<=len-n ; i1++){
-            if(n==1){
-                retList.add(a[i1].concat(","));
-            }else{
-                for(int i2=i1+1;i2<=len-n+1;i2++){
-                    if(n==2){
-                        retList.add(a[i1] + "," + a[i2] + ",");
-                    }else{
-                        for(int i3=i2+1;i3<len;i3++){
-                            retList.add(a[i1] + "," + a[i2] + "," + a[i3] + ",");
+            retList.add(item);
+        }else{
+
+            for(int i1 = 0 ; i1<=len-n ; i1++){
+                if(n==1){
+                    retList.add(a[i1].concat(","));
+                }else{
+                    for(int i2=i1+1;i2<=len-n+1;i2++){
+                        if(n==2){
+                            retList.add(a[i1] + "," + a[i2] + ",");
+                        }else{
+                            for(int i3=i2+1;i3<=len-n+2;i3++){
+                                if(n==3){
+                                    retList.add(a[i1] + "," + a[i2] + "," + a[i3] + ",");
+                                }else{
+                                    for(int i4=i3+1;i4<=len-n+3;i4++){
+                                        if(n==4){
+                                            retList.add(a[i1] + "," + a[i2] + "," + a[i3] + "," + a[i4] + ",");
+                                        }else{
+                                            for(int i5=i4+1;i5<len;i5++){
+                                                retList.add(a[i1] + "," + a[i2] + "," + a[i3] + "," + a[i4] + "," + a[i5] + ",");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
+            // end of for
         }
         return retList;
     }
