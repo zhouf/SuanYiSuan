@@ -6,6 +6,7 @@
     <string name="btn_ok">确定</string>
     <string name="ck_label">保留当前输入供下次使用</string>
     <string name="no_data_tip">无符合条件的数据</string>
+    <string name="tomany_data_tip">超过1万条数据，请重新设置过滤条件</string>
     <string name="settings_menu_item">设置</string>
     <string name="settings_title">条件设置</string>
     <string name="settings_item_match_label">使用规则</string>

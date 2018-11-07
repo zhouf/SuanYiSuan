@@ -17,12 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private final static String TAG = "MainTAG";
 
     private final static int MAX = 33;
+    private final static int LIMIT = 10000;
 
     EditText num[] = new EditText[6];
     Spinner select[] = new Spinner[6];
@@ -43,22 +45,6 @@ public class MainActivity extends AppCompatActivity {
             num[i] = findViewById(numArray[i]);
             select[i] = findViewById(spinnerArray[i]);
         }
-        /*
-        num[1] = findViewById(R.id.num2);
-        num[2] = findViewById(R.id.num3);
-        num[3] = findViewById(R.id.num4);
-        num[4] = findViewById(R.id.num5);
-        num[5] = findViewById(R.id.num6);
-
-        select[1] = findViewById(R.id.spinner2);
-        select[2] = findViewById(R.id.spinner3);
-        select[3] = findViewById(R.id.spinner4);
-        select[4] = findViewById(R.id.spinner5);
-        select[5] = findViewById(R.id.spinner6);
-
-        for(int i=0;i<3;i++)
-            select[i].setSelection(2);
-        */
 
         saved = findViewById(R.id.chk_saved);
 
@@ -137,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         //是否保存数据
         saveData();
 
+        btn.setEnabled(false);
         ArrayList<String> listData = new ArrayList<>();
         ArrayList<String> lista = getArrayList(num[0],select[0]);
         for (int i=1;i<6;i++){
@@ -144,42 +131,58 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<String> listb = getArrayList(num[i],select[i]);
             Log.i(TAG, "onStartClick: listb=" + listb);
             lista = unionList(lista,listb);
+            Log.i(TAG, "run: list.size=" + lista.size());
+            int datasize = lista.size();
+            if(datasize==0 || datasize>LIMIT){
+                //当前面的数据不符合条件时，退出循环
+                Log.i(TAG, "onStartClick: 退出循环 exit loop datasize=" + datasize);
+                break;
+            }
         }
+
+        /*boolean useConfig = sharedPrefs.getBoolean("use_setting",false);
+        String matchType = sharedPrefs.getString("match_type","");
+        eqType = getString(R.string.settings_item_option_equals).equals(matchType);*/
 
         for(String stra : lista){
             StringBuilder builder = new StringBuilder(stra);
             builder.deleteCharAt(builder.lastIndexOf(","));
-            listData.add(builder.toString());
+            //sort
+            String sortedStr = sortStr(builder.toString());
+
+            listData.add(sortedStr);
         }
 
-        /*for(String stra : lista){
-            for(String strb : listb){
-                for(String strc : listc){
-                    StringBuilder builder = new StringBuilder();
-                    builder.append(stra).append(strb).append(strc);
-                    builder.deleteCharAt(builder.lastIndexOf(","));
-                    listData.add(builder.toString());
-                }
-            }
-        }*/
 
-        Log.i(TAG, "onStartClick: 过滤前list.length=" + listData.size());
-        boolean useConfig = sharedPrefs.getBoolean("use_setting",false);
-        if(useConfig){
-            String matchType = sharedPrefs.getString("match_type","");
-            eqType = getString(R.string.settings_item_option_equals).equals(matchType);
-            NumUtil.filterData(listData,dan,zhi,less16,eqType);
-
-            Log.i(TAG, "onStartClick: 过滤后list.length2=" + listData.size());
-        }
-
-        if(listData.size()==0){
+        int datasize = listData.size();
+        if(datasize==0) {
             Toast.makeText(this, R.string.no_data_tip, Toast.LENGTH_LONG).show();
+        }else if(datasize>LIMIT){
+            Toast.makeText(this, R.string.tomany_data_tip, Toast.LENGTH_LONG).show();
         }else {
+            Log.i(TAG, "onStartClick: 打开列表窗口");
             Intent listIntent = new Intent(this, MyListActivity.class);
             listIntent.putStringArrayListExtra("data", listData);
             startActivity(listIntent);
         }
+        btn.setEnabled(true);
+    }
+
+    /**
+     * 对字串中的数据进行排序
+     * @param s 字串如：3，12，6，8，5
+     * @return 排序后的字串如：3，5，6，8，12
+     */
+    private String sortStr(String s) {
+        String items[] = s.split(",");
+        int num[] = new int[items.length];
+        for (int i = 0; i < items.length; i++) {
+            num[i] = Integer.valueOf(items[i]);
+        }
+        Arrays.sort(num);
+        String retStr = Arrays.toString(num);
+        retStr = retStr.substring(1, retStr.length()-1).replaceAll(" ", "");
+        return retStr;
     }
 
     /**
@@ -200,10 +203,26 @@ public class MainActivity extends AppCompatActivity {
         }else if(lena>=0 && lenb==0){
             return lista;
         }else{
-            //两个集合都包含元素
+            //两个集合都包含元素，对符合条件的数据进行判断
+            boolean useConfig = sharedPrefs.getBoolean("use_setting",false);
+            String matchType = sharedPrefs.getString("match_type","");
+            eqType = getString(R.string.settings_item_option_equals).equals(matchType);
+            //useConfig = false;
+            Log.i(TAG, "unionList: dan=" + dan + " zhi=" + zhi + " less16=" + less16 + " eqType=" + eqType);
+
+            int addCounter = 0;
             for(String stra : lista){
                 for(String strb : listb){
-                    retList.add(stra + strb);
+                    if(!(useConfig && !NumUtil.checkOneOK(dan,zhi,less16,eqType,stra+strb))){
+                        retList.add(stra + strb);
+                        addCounter++;
+                        if(addCounter>LIMIT){
+                            //如果有超过上限，退出
+                            return retList;
+                        }
+                    }else{
+                        Log.i(TAG, "unionList: 舍弃");
+                    }
                 }
             }
         }

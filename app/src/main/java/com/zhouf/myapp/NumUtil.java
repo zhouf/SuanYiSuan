@@ -24,29 +24,46 @@ public class NumUtil {
     public static void filterData(ArrayList<String> listData, int dan, int zhi, int less16, boolean eqType) {
         ArrayList<String> removed = new ArrayList<String>();
         for(String str : listData){
-            int[] array = toIntArray(str);
-            int d = countDan(array);
-            int z = countZhi(array);
-            int less = countLess16(array);
-            //Log.i(TAG, "filterData:"+str+" d["+d+"] z["+z+"] less["+less+"]");
-            if(eqType){
-                //精确匹配
-                if((dan>=0 && d!=dan) || (zhi>=0 && z!=zhi) || (less16>=0 && less!=less16)){
-                    //加入待删除列表
-                    removed.add(str);
-                    //Log.i(TAG, "filterData: 移除");
-                }
-            }else{
-                //不超过匹配
-                if((dan>=0 && d>dan) || (zhi>=0 && z>zhi) || (less16>=0 && less>less16)){
-                    //删除不符合条件的数据
-                    removed.add(str);
-                    //Log.i(TAG, "filterData: 移除");
-                }
+            if(!checkOneOK(dan, zhi, less16, eqType, str)){
+                removed.add(str);
             }
         }
 
         listData.removeAll(removed);
+    }
+
+    /**
+     * 检查一项数据是否符合条件
+     * @param dan
+     * @param zhi
+     * @param less16
+     * @param eqType
+     * @param str
+     * @return 符合条件返回true
+     */
+    public static boolean checkOneOK(int dan, int zhi, int less16, boolean eqType, String str) {
+        boolean retVal = true;
+        int[] array = toIntArray(str);
+        int d = countDan(array);
+        int z = countZhi(array);
+        int less = countLess16(array);
+        if(eqType){
+            //精确匹配
+            if((dan>=0 && d!=dan) || (zhi>=0 && z!=zhi) || (less16>=0 && less!=less16)){
+                //加入待删除列表
+                retVal = false;
+                //Log.i(TAG, "filterData: 移除");
+            }
+        }else{
+            //不超过匹配
+            if((dan>=0 && d>dan) || (zhi>=0 && z>zhi) || (less16>=0 && less>less16)){
+                //删除不符合条件的数据
+                retVal = false;
+                //Log.i(TAG, "filterData: 移除");
+            }
+        }
+        Log.i(TAG, "filterData:"+str+" d["+d+"] z["+z+"] less["+less+"] ret=" + retVal);
+        return retVal;
     }
 
     /**

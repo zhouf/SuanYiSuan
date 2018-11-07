@@ -32,8 +32,9 @@ public class MyListAdapter extends ArrayAdapter {
 
         String str = (String)getItem(position);
         TextView title = (TextView) itemView.findViewById(R.id.listText);
-        str = str.replaceAll(",,",",").replaceAll(",","-");
-        if(str.endsWith("-")){
+//        str = str.replaceAll(",,",",").replaceAll(",","-");
+        str = str.replaceAll(",,",",");
+        if(str.endsWith(",")){
             str = str.substring(0,str.length()-1);
         }
         title.setText(str);
