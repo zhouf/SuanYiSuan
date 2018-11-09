@@ -59,6 +59,16 @@ public class SettingsActivity extends AppCompatActivity {
             new PrefListener(getString(R.string.settings_item_dan_key));
             new PrefListener(getString(R.string.settings_item_zhi_key));
             new PrefListener(getString(R.string.settings_item_less16_key));
+            new PrefListener(getString(R.string.settings_endwith_key_set1));
+            new PrefListener(getString(R.string.settings_endwith_key_set2));
+            new PrefListener(getString(R.string.settings_endwith_key_set3));
+            new PrefListener(getString(R.string.settings_endwith_key_set4));
+            new PrefListener(getString(R.string.settings_endwith_key_set5));
+            new PrefListener(getString(R.string.settings_endwith_key_set6));
+            new PrefListener(getString(R.string.settings_endwith_key_set7));
+            new PrefListener(getString(R.string.settings_endwith_key_set8));
+            new PrefListener(getString(R.string.settings_endwith_key_set9));
+            new PrefListener(getString(R.string.settings_endwith_key_set0));
         }
     }
 }

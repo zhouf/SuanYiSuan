@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -144,13 +147,28 @@ public class MainActivity extends AppCompatActivity{
         String matchType = sharedPrefs.getString("match_type","");
         eqType = getString(R.string.settings_item_option_equals).equals(matchType);*/
 
+        //过滤尾数设置
+        boolean useEndwith = sharedPrefs.getBoolean("use_endwith",false);
+        Map<Integer,Integer> endMap = new HashMap<Integer,Integer>();
+        for(int i=0;i<=9;i++){
+            //set0~set9
+            Integer v = Integer.valueOf(sharedPrefs.getString("set" + i,"0"));
+            if(v>0){
+                //有设置内容，放入Map
+                endMap.put(i,v);
+                //Log.i(TAG, "onStartClick: endMap("+i+")->" + v);
+            }
+        }
+
         for(String stra : lista){
             StringBuilder builder = new StringBuilder(stra);
             builder.deleteCharAt(builder.lastIndexOf(","));
             //sort
-            String sortedStr = sortStr(builder.toString());
+            String sortedStr = sortStr(builder.toString(),useEndwith,endMap);
 
-            listData.add(sortedStr);
+            if(!TextUtils.isEmpty(sortedStr)){
+                listData.add(sortedStr);
+            }
         }
 
 
@@ -171,15 +189,43 @@ public class MainActivity extends AppCompatActivity{
     /**
      * 对字串中的数据进行排序
      * @param s 字串如：3，12，6，8，5
+     * @param useEndwith 是否启用尾数过滤
+     * @param endMap 尾数过滤设置项
      * @return 排序后的字串如：3，5，6，8，12
      */
-    private String sortStr(String s) {
+    private String sortStr(String s,boolean useEndwith,Map<Integer,Integer> endMap) {
         String items[] = s.split(",");
         int num[] = new int[items.length];
         for (int i = 0; i < items.length; i++) {
             num[i] = Integer.valueOf(items[i]);
         }
         Arrays.sort(num);
+
+        //判断过滤尾数
+        if(useEndwith){
+            //对endMap中每个规则进行过滤
+            for(Integer k : endMap.keySet()){
+                //k是尾数规则
+                int limit = endMap.get(k);//规则上限
+
+                //统计尾数是k的数据个数
+                int cnt = 0;
+                for(int n : num){
+                    //遍历数据进行判断
+                    if(n%10==k){
+                        cnt++;
+                    }
+                }
+
+                if(cnt>limit){
+                    //超过，直接返回空
+                    return "";
+                }
+            }
+        }
+
+
+
         String retStr = Arrays.toString(num);
         retStr = retStr.substring(1, retStr.length()-1).replaceAll(" ", "");
         return retStr;

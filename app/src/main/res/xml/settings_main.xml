@@ -3,46 +3,136 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
 
-    <SwitchPreference
-        android:key="use_setting"
-        android:title="@string/settings_item_enable_label"
-        android:defaultValue="true"/>
+    <PreferenceCategory android:title="@string/settings_title1">
+        <SwitchPreference
+            android:key="use_setting"
+            android:title="@string/settings_item_enable_label"
+            android:defaultValue="true"/>
 
-    <ListPreference
-        android:defaultValue="@string/settings_item_option_less"
-        android:entries="@array/settings_order_by_labels"
-        android:entryValues="@array/settings_order_by_labels"
-        android:key="match_type"
-        android:summary="{v}"
-        android:dependency="use_setting"
-        android:title="@string/settings_item_match_label" />
+        <ListPreference
+            android:defaultValue="@string/settings_item_option_less"
+            android:entries="@array/settings_order_by_labels"
+            android:entryValues="@array/settings_order_by_labels"
+            android:key="match_type"
+            android:summary="{v}"
+            android:dependency="use_setting"
+            android:title="@string/settings_item_match_label" />
 
 
-    <ListPreference
-        android:defaultValue="3"
-        android:entries="@array/settings_number_option_label"
-        android:entryValues="@array/settings_number_option_value"
-        android:key="@string/settings_item_dan_key"
-        android:summary="当前值{v}"
-        android:dependency="use_setting"
-        android:title="@string/settings_item_dan_label" />
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/settings_number_option_label"
+            android:entryValues="@array/settings_number_option_value"
+            android:key="@string/settings_item_dan_key"
+            android:summary="当前值{v}"
+            android:dependency="use_setting"
+            android:title="@string/settings_item_dan_label" />
 
-    <ListPreference
-        android:defaultValue="3"
-        android:entries="@array/settings_number_option_label"
-        android:entryValues="@array/settings_number_option_value"
-        android:key="@string/settings_item_zhi_key"
-        android:summary="当前值{v}"
-        android:dependency="use_setting"
-        android:title="@string/settings_item_zhi_label" />
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/settings_number_option_label"
+            android:entryValues="@array/settings_number_option_value"
+            android:key="@string/settings_item_zhi_key"
+            android:summary="当前值{v}"
+            android:dependency="use_setting"
+            android:title="@string/settings_item_zhi_label" />
 
-    <ListPreference
-        android:defaultValue="3"
-        android:entries="@array/settings_number_option_label"
-        android:entryValues="@array/settings_number_option_value"
-        android:key="@string/settings_item_less16_key"
-        android:summary="当前值{v}"
-        android:dependency="use_setting"
-        android:title="@string/settings_item_less16_label" />
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/settings_number_option_label"
+            android:entryValues="@array/settings_number_option_value"
+            android:key="@string/settings_item_less16_key"
+            android:summary="当前值{v}"
+            android:dependency="use_setting"
+            android:title="@string/settings_item_less16_label" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_title2">
+        <SwitchPreference
+            android:key="use_endwith"
+            android:title="@string/settings_item_endwith_label"
+            android:defaultValue="true"/>
+
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set1"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="1" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set2"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="2" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set3"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="3" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set4"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="4" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set5"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="5" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set6"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="6" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set7"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="7" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set8"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="8" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set9"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="9" />
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endwith_option_label"
+            android:entryValues="@array/settings_endwith_option_value"
+            android:key="@string/settings_endwith_key_set0"
+            android:summary="当前值{v}"
+            android:dependency="use_endwith"
+            android:title="0" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

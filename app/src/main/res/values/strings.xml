@@ -16,8 +16,21 @@
     <string name="settings_item_less16_label">1-16个数</string>
     <string name="settings_item_zhi_label">质数个数</string>
     <string name="settings_item_enable_label">是否使用规则</string>
+    <string name="settings_item_endwith_label">是否使用尾数缩水</string>
     <string name="settings_item_dan_key">dan</string>
     <string name="settings_item_less16_key">less16</string>
     <string name="settings_item_zhi_key">zhi</string>
     <string name="settings_unlimited">不限制</string>
+    <string name="settings_title1">基本设置</string>
+    <string name="settings_title2">尾数设置</string>
+    <string name="settings_endwith_key_set0">set0</string>
+    <string name="settings_endwith_key_set1">set1</string>
+    <string name="settings_endwith_key_set2">set2</string>
+    <string name="settings_endwith_key_set3">set3</string>
+    <string name="settings_endwith_key_set4">set4</string>
+    <string name="settings_endwith_key_set5">set5</string>
+    <string name="settings_endwith_key_set6">set6</string>
+    <string name="settings_endwith_key_set7">set7</string>
+    <string name="settings_endwith_key_set8">set8</string>
+    <string name="settings_endwith_key_set9">set9</string>
 </resources>
