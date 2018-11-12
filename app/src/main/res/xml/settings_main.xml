@@ -45,7 +45,13 @@
             android:summary="当前值{v}"
             android:dependency="use_setting"
             android:title="@string/settings_item_less16_label" />
+        <EditTextPreference
+            android:key="sure_num"
+            android:hint="多个数请使用逗号"
+            android:title="一定出现"
+            android:summary="当前值{v}"/>
     </PreferenceCategory>
+
 
     <PreferenceCategory android:title="@string/settings_title2">
         <SwitchPreference

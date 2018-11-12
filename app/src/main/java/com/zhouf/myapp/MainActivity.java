@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity{
@@ -53,7 +54,9 @@ public class MainActivity extends AppCompatActivity{
 
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean useConfig = sharedPrefs.getBoolean("use_setting",false);
+        boolean useEndwith = sharedPrefs.getBoolean("use_endwith",false);
         String matchType = sharedPrefs.getString("match_type","");
+        String endwithStr = endwithDescribe(getEndwithMap());
 
         dan = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_dan_key),"0"));
         zhi = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_zhi_key),"0"));
@@ -61,8 +64,18 @@ public class MainActivity extends AppCompatActivity{
         Log.i(TAG, "onCreate: useConfig=" + useConfig);
 
         TextView configTip = findViewById(R.id.config_tip);
+
+
+        String tipstr = "";
         if(useConfig){
-            configTip.setText("使用过滤条件，" + matchType + "(单"+dan+"，质"+zhi+"，1~16:"+less16+")");
+            tipstr = "使用过滤条件，" + matchType + "(单"+dan+"，质"+zhi+"，1~16:"+less16+")";
+        }
+        if(useEndwith && endwithStr!=null && endwithStr.length()>0){
+            tipstr = tipstr.length()>6? (tipstr + '\n' + endwithStr) : endwithStr;
+        }
+
+        if(tipstr.trim().length()>0){
+            configTip.setText(tipstr);
             configTip.setVisibility(View.VISIBLE);
         }else{
             configTip.setVisibility(View.GONE);
@@ -149,22 +162,14 @@ public class MainActivity extends AppCompatActivity{
 
         //过滤尾数设置
         boolean useEndwith = sharedPrefs.getBoolean("use_endwith",false);
-        Map<Integer,Integer> endMap = new HashMap<Integer,Integer>();
-        for(int i=0;i<=9;i++){
-            //set0~set9
-            Integer v = Integer.valueOf(sharedPrefs.getString("set" + i,"0"));
-            if(v>0){
-                //有设置内容，放入Map
-                endMap.put(i,v);
-                //Log.i(TAG, "onStartClick: endMap("+i+")->" + v);
-            }
-        }
+        String sureNum = sharedPrefs.getString("sure_num","");
+        Map<Integer, Integer> endMap = getEndwithMap();
 
         for(String stra : lista){
             StringBuilder builder = new StringBuilder(stra);
             builder.deleteCharAt(builder.lastIndexOf(","));
             //sort
-            String sortedStr = sortStr(builder.toString(),useEndwith,endMap);
+            String sortedStr = sortStr(builder.toString(),useEndwith,endMap,sureNum);
 
             if(!TextUtils.isEmpty(sortedStr)){
                 listData.add(sortedStr);
@@ -187,15 +192,49 @@ public class MainActivity extends AppCompatActivity{
     }
 
     /**
+     * 获得尾号过滤的map信息
+     * @return
+     */
+    private Map<Integer, Integer> getEndwithMap() {
+        Map<Integer,Integer> endMap = new HashMap<Integer,Integer>();
+        for(int i=0;i<=9;i++){
+            //set0~set9
+            Integer v = Integer.valueOf(sharedPrefs.getString("set" + i,"0"));
+            if(v>0){
+                //有设置内容，放入Map
+                endMap.put(i,v);
+                //Log.i(TAG, "onStartClick: endMap("+i+")->" + v);
+            }
+        }
+        return endMap;
+    }
+
+    //返回尾号过滤的文本描述
+    private String endwithDescribe(Map<Integer,Integer> map){
+        StringBuilder retStr = new StringBuilder();
+        for(Integer k : map.keySet()){
+            retStr.append(k).append('[').append(map.get(k)).append("个],");
+        }
+        if(retStr.toString().endsWith(",")){
+            retStr.deleteCharAt(retStr.lastIndexOf(","));
+        }
+        if(retStr.length()>0){
+            retStr.insert(0,"尾数限定：");
+        }
+        return retStr.toString();
+    }
+
+    /**
      * 对字串中的数据进行排序
      * @param s 字串如：3，12，6，8，5
      * @param useEndwith 是否启用尾数过滤
      * @param endMap 尾数过滤设置项
+     * @param sureNum 一定会出现的数据，可为空，或2,3
      * @return 排序后的字串如：3，5，6，8，12
      */
-    private String sortStr(String s,boolean useEndwith,Map<Integer,Integer> endMap) {
+    private String sortStr(String s,boolean useEndwith,Map<Integer,Integer> endMap,String sureNum) {
         String items[] = s.split(",");
-        int num[] = new int[items.length];
+        Integer num[] = new Integer[items.length];
         for (int i = 0; i < items.length; i++) {
             num[i] = Integer.valueOf(items[i]);
         }
@@ -217,8 +256,19 @@ public class MainActivity extends AppCompatActivity{
                     }
                 }
 
-                if(cnt>limit){
-                    //超过，直接返回空
+                if(cnt!=limit){
+                    //不相等，直接返回空
+                    return "";
+                }
+            }
+        }
+
+        if(sureNum.trim().length()>0){
+            //如果有设置一定出现的数字
+            List<Integer> numList = Arrays.asList(num);
+            for(String ss : sureNum.split(",")){
+                Integer k1 = Integer.valueOf(ss);
+                if(!numList.contains(k1)){
                     return "";
                 }
             }
