@@ -43,10 +43,10 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if(newValue.toString().equals("-1")){
+                if(newValue!=null && newValue.toString().equals("-1")){
                     newValue = getString(R.string.settings_unlimited);
                 }
-                preference.setSummary(format.replace("{v}", newValue==null?"null":newValue.toString()));
+                preference.setSummary(format.replace("{v}", newValue==null?"未设置":newValue.toString()));
                 return true;
             }
         }
