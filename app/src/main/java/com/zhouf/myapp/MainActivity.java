@@ -256,8 +256,8 @@ public class MainActivity extends AppCompatActivity{
                     }
                 }
 
-                if(cnt!=limit){
-                    //不相等，直接返回空
+                if(cnt<limit){
+                    //不满足条件，直接返回空
                     return "";
                 }
             }
