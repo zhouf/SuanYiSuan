@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity{
         //dan = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_dan_key),"0"));
         //zhi = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_zhi_key),"0"));
         less16 = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_less16_key),"0"));
+        String sureNum = sharedPrefs.getString("sure_num","");
         Log.i(TAG, "onCreate: useConfig=" + useConfig);
 
         TextView configTip = findViewById(R.id.config_tip);
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity{
         String tipstr = "";
         if(useConfig){
             tipstr = "使用过滤条件，" + matchType + "(1~16:"+less16+")";
+        }
+        if(sureNum!=null && sureNum.length()>0){
+            tipstr = "["+sureNum+"]" + tipstr;
         }
         if(useEndwith && endwithStr!=null && endwithStr.length()>0){
             tipstr = tipstr.length()>6? (tipstr + '\n' + endwithStr) : endwithStr;
@@ -143,7 +147,7 @@ public class MainActivity extends AppCompatActivity{
         ArrayList<String> listData = new ArrayList<>();
         ArrayList<String> lista = getArrayList(num[0],select[0]);
         for (int i=1;i<6;i++){
-            Log.i(TAG, "onStartClick: lista=" + lista);
+            Log.i(TAG, "onStartClick: lista["+lista.size()+"]=" + lista);
             ArrayList<String> listb = getArrayList(num[i],select[i]);
             Log.i(TAG, "onStartClick: listb=" + listb);
             lista = unionList(lista,listb);
