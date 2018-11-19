@@ -56,8 +56,6 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
             new PrefListener("match_type");
-            new PrefListener(getString(R.string.settings_item_dan_key));
-            new PrefListener(getString(R.string.settings_item_zhi_key));
             new PrefListener(getString(R.string.settings_item_less16_key));
             new PrefListener("sure_num");
             new PrefListener(getString(R.string.settings_endwith_key_set1));

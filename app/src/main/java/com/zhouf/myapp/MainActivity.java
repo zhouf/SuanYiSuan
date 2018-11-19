@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity{
     EditText num[] = new EditText[6];
     Spinner select[] = new Spinner[6];
     CheckBox saved;
-    int dan,zhi,less16;
+    int less16;
     boolean eqType;
     SharedPreferences sharedPrefs;
 
@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity{
         String matchType = sharedPrefs.getString("match_type","");
         String endwithStr = endwithDescribe(getEndwithMap());
 
-        dan = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_dan_key),"0"));
-        zhi = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_zhi_key),"0"));
+        //dan = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_dan_key),"0"));
+        //zhi = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_zhi_key),"0"));
         less16 = Integer.parseInt(sharedPrefs.getString(getString(R.string.settings_item_less16_key),"0"));
         Log.i(TAG, "onCreate: useConfig=" + useConfig);
 
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity{
 
         String tipstr = "";
         if(useConfig){
-            tipstr = "使用过滤条件，" + matchType + "(单"+dan+"，质"+zhi+"，1~16:"+less16+")";
+            tipstr = "使用过滤条件，" + matchType + "(1~16:"+less16+")";
         }
         if(useEndwith && endwithStr!=null && endwithStr.length()>0){
             tipstr = tipstr.length()>6? (tipstr + '\n' + endwithStr) : endwithStr;
@@ -304,12 +304,12 @@ public class MainActivity extends AppCompatActivity{
             String matchType = sharedPrefs.getString("match_type","");
             eqType = getString(R.string.settings_item_option_equals).equals(matchType);
             //useConfig = false;
-            Log.i(TAG, "unionList: dan=" + dan + " zhi=" + zhi + " less16=" + less16 + " eqType=" + eqType);
+            Log.i(TAG, "unionList: less16=" + less16 + " eqType=" + eqType);
 
             int addCounter = 0;
             for(String stra : lista){
                 for(String strb : listb){
-                    if(!(useConfig && !NumUtil.checkOneOK(dan,zhi,less16,eqType,stra+strb))){
+                    if(!(useConfig && !NumUtil.checkOneOK(less16,eqType,stra+strb))){
                         retList.add(stra + strb);
                         addCounter++;
                         if(addCounter>LIMIT){

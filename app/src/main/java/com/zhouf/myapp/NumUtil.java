@@ -41,6 +41,7 @@ public class NumUtil {
      * @param str
      * @return 符合条件返回true
      */
+    @Deprecated
     public static boolean checkOneOK(int dan, int zhi, int less16, boolean eqType, String str) {
         boolean retVal = true;
         int[] array = toIntArray(str);
@@ -63,6 +64,30 @@ public class NumUtil {
             }
         }
         Log.i(TAG, "filterData:"+str+" d["+d+"] z["+z+"] less["+less+"] ret=" + retVal);
+        return retVal;
+    }
+
+    //取消了单数和质数的判断
+    public static boolean checkOneOK(int less16, boolean eqType, String str) {
+        boolean retVal = true;
+        int[] array = toIntArray(str);
+        int less = countLess16(array);
+        if(eqType){
+            //精确匹配
+            if(less16>=0 && less!=less16){
+                //加入待删除列表
+                retVal = false;
+                //Log.i(TAG, "filterData: 移除");
+            }
+        }else{
+            //不超过匹配
+            if(less16>=0 && less>less16){
+                //删除不符合条件的数据
+                retVal = false;
+                //Log.i(TAG, "filterData: 移除");
+            }
+        }
+        Log.i(TAG, "filterData:"+str+" less["+less+"] ret=" + retVal);
         return retVal;
     }
 

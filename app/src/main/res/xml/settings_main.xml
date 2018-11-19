@@ -18,25 +18,6 @@
             android:dependency="use_setting"
             android:title="@string/settings_item_match_label" />
 
-
-        <ListPreference
-            android:defaultValue="3"
-            android:entries="@array/settings_number_option_label"
-            android:entryValues="@array/settings_number_option_value"
-            android:key="@string/settings_item_dan_key"
-            android:summary="当前值{v}"
-            android:dependency="use_setting"
-            android:title="@string/settings_item_dan_label" />
-
-        <ListPreference
-            android:defaultValue="3"
-            android:entries="@array/settings_number_option_label"
-            android:entryValues="@array/settings_number_option_value"
-            android:key="@string/settings_item_zhi_key"
-            android:summary="当前值{v}"
-            android:dependency="use_setting"
-            android:title="@string/settings_item_zhi_label" />
-
         <ListPreference
             android:defaultValue="3"
             android:entries="@array/settings_number_option_label"
