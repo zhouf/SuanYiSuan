@@ -29,10 +29,12 @@ public class MainActivity extends AppCompatActivity{
 
     private final static int MAX = 33;
     private final static int LIMIT = 10000;
+    private final static int RESULT_MAX = 1000; //结果列表最大上限
 
     EditText num[] = new EditText[6];
     Spinner select[] = new Spinner[6];
     CheckBox saved;
+    TextView configTip;
     int less16;
     boolean eqType;
     SharedPreferences sharedPrefs;
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity{
         String sureNum = sharedPrefs.getString("sure_num","");
         Log.i(TAG, "onCreate: useConfig=" + useConfig);
 
-        TextView configTip = findViewById(R.id.config_tip);
+        configTip = findViewById(R.id.config_tip);
 
 
         String tipstr = "";
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity{
             tipstr = "["+sureNum+"]" + tipstr;
         }
         if(useEndwith && endwithStr!=null && endwithStr.length()>0){
-            tipstr = tipstr.length()>6? (tipstr + '\n' + endwithStr) : endwithStr;
+            tipstr = tipstr.length()>2? (tipstr + endwithStr) : endwithStr;
         }
 
         if(tipstr.trim().length()>0){
@@ -145,8 +147,9 @@ public class MainActivity extends AppCompatActivity{
 
         btn.setEnabled(false);
         ArrayList<String> listData = new ArrayList<>();
+        //前三组数放在lista中
         ArrayList<String> lista = getArrayList(num[0],select[0]);
-        for (int i=1;i<6;i++){
+        for (int i=1;i<3;i++){
             Log.i(TAG, "onStartClick: lista["+lista.size()+"]=" + lista);
             ArrayList<String> listb = getArrayList(num[i],select[i]);
             Log.i(TAG, "onStartClick: listb=" + listb);
@@ -159,24 +162,63 @@ public class MainActivity extends AppCompatActivity{
                 break;
             }
         }
+        //后三组数放在listb中
+        ArrayList<String> listb = getArrayList(num[3],select[3]);
+        for (int i=4;i<6;i++){
+            Log.i(TAG, "onStartClick: listb["+listb.size()+"]=" + listb);
+            ArrayList<String> listc = getArrayList(num[i],select[i]);
+            Log.i(TAG, "onStartClick: listc=" + listc);
+            listb = unionList(listb,listc);
+            Log.i(TAG, "run: list.size=" + listb.size());
+            int datasize = listb.size();
+            if(datasize==0 || datasize>LIMIT){
+                //当前面的数据不符合条件时，退出循环
+                Log.i(TAG, "onStartClick: 退出循环 exit loop datasize=" + datasize);
+                break;
+            }
+        }
 
         /*boolean useConfig = sharedPrefs.getBoolean("use_setting",false);
         String matchType = sharedPrefs.getString("match_type","");
         eqType = getString(R.string.settings_item_option_equals).equals(matchType);*/
 
+        Log.i(TAG, "onStartClick: lista.size=" + lista.size() + " listb.size=" + listb.size());
         //过滤尾数设置
         boolean useEndwith = sharedPrefs.getBoolean("use_endwith",false);
         String sureNum = sharedPrefs.getString("sure_num","");
         Map<Integer, Integer> endMap = getEndwithMap();
 
+        int sizea = lista.size();
+        int sizeb = listb.size();
+        int cnta=0,cntb=0,cntc=0;
         for(String stra : lista){
-            StringBuilder builder = new StringBuilder(stra);
-            builder.deleteCharAt(builder.lastIndexOf(","));
-            //sort
-            String sortedStr = sortStr(builder.toString(),useEndwith,endMap,sureNum);
+            cnta++;
+            cntb = 0;
+            for(String strb : listb){
+                cntb++;
+                StringBuilder builder = new StringBuilder(stra + strb);
+                builder.deleteCharAt(builder.lastIndexOf(","));
+                Log.i(TAG, "onStartClick: builder=" + builder.toString());
+                //sort
+                String sortedStr = sortStr(builder.toString(),useEndwith,endMap,sureNum);
 
-            if(!TextUtils.isEmpty(sortedStr)){
-                listData.add(sortedStr);
+                Log.i(TAG, "onStartClick: sortedStr=" + sortedStr);
+                if(!TextUtils.isEmpty(sortedStr)){
+                    cntc++;
+                    listData.add(sortedStr);
+                }
+                String runstr = String.format("过滤数据a %d/%d,b %d/%d 有效%d",sizea,cnta,sizeb,cntb,cntc);
+                Log.i(TAG, "onStartClick: runstr=" + runstr);
+                configTip.setText(runstr);
+
+                if(cntc>RESULT_MAX){
+                    break;
+                }
+            }
+
+            if(cntc>RESULT_MAX){
+                Toast.makeText(this, R.string.result_data_tip, Toast.LENGTH_LONG).show();
+                break;
             }
         }
 
