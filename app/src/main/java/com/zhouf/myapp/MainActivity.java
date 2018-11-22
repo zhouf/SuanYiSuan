@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity{
                 }
                 String runstr = String.format("过滤数据a %d/%d,b %d/%d 有效%d",sizea,cnta,sizeb,cntb,cntc);
                 Log.i(TAG, "onStartClick: runstr=" + runstr);
-                configTip.setText(runstr);
+                //configTip.setText(runstr);
 
                 if(cntc>RESULT_MAX){
                     break;
