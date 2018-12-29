@@ -347,14 +347,30 @@ public class MainActivity extends AppCompatActivity{
         }else{
             //两个集合都包含元素，对符合条件的数据进行判断
             boolean useConfig = sharedPrefs.getBoolean("use_setting",false);
+            boolean lessAfter = sharedPrefs.getBoolean("less_after",false);//前面的数比后面数小
             String matchType = sharedPrefs.getString("match_type","");
             eqType = getString(R.string.settings_item_option_equals).equals(matchType);
             //useConfig = false;
             Log.i(TAG, "unionList: less16=" + less16 + " eqType=" + eqType);
 
+
             int addCounter = 0;
             for(String stra : lista){
+                int maxa = maxNum(stra);
+
                 for(String strb : listb){
+                    if(lessAfter){
+                        //在listb中查找是否有小于maxa的数
+                        boolean pass = true;
+                        for(String sb : strb.split(",")){
+                            int b = Integer.valueOf(sb).intValue();
+                            if(b<maxa){
+                                pass = false;
+                                break;
+                            }
+                        }
+                        if(!pass)   continue;//找下一组b，否则继续执行后面的操作
+                    }
                     if(!(useConfig && !NumUtil.checkOneOK(less16,eqType,stra+strb))){
                         retList.add(stra + strb);
                         addCounter++;
@@ -369,6 +385,16 @@ public class MainActivity extends AppCompatActivity{
             }
         }
         return retList;
+    }
+
+    //求字符串中的最大值11,12,15
+    private int maxNum(String stra) {
+        int max = 0;
+        for(String sa : stra.split(",")){
+            int a = Integer.valueOf(sa).intValue();
+            if(a>max)   max = a;
+        }
+        return max;
     }
 
 

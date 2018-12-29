@@ -16,6 +16,7 @@
     <string name="settings_item_less16_label">1-16个数</string>
     <string name="settings_item_enable_label">是否使用规则</string>
     <string name="settings_item_endwith_label">是否使用尾数缩水</string>
+    <string name="settings_item_less_than_after">前排比后排小</string>
     <string name="settings_item_less16_key">less16</string>
     <string name="settings_unlimited">不限制</string>
     <string name="settings_title1">基本设置</string>
