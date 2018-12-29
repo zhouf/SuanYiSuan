@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity{
 
     private final static int MAX = 33;
     private final static int LIMIT = 10000;
-    private final static int RESULT_MAX = 1000; //结果列表最大上限
+    private final static int RESULT_MAX = 10000; //结果列表最大上限
 
     EditText num[] = new EditText[6];
     Spinner select[] = new Spinner[6];
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity{
                 Log.i(TAG, "onStartClick: sortedStr=" + sortedStr);
                 if(!TextUtils.isEmpty(sortedStr)){
                     cntc++;
-                    listData.add(sortedStr);
+                    listData.add(cntc + "#" + sortedStr);
                 }
                 String runstr = String.format("过滤数据a %d/%d,b %d/%d 有效%d",sizea,cnta,sizeb,cntb,cntc);
                 Log.i(TAG, "onStartClick: runstr=" + runstr);

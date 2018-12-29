@@ -30,7 +30,10 @@ public class MyListAdapter extends ArrayAdapter {
             itemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item,parent,false);
         }
 
-        String str = (String)getItem(position);
+        String stra = (String)getItem(position);
+        //stra = 3#1,2,3 第一个是位置
+        String s[] = stra.split("#");
+        String str = s[1];
         TextView title = (TextView) itemView.findViewById(R.id.listText);
 //        str = str.replaceAll(",,",",").replaceAll(",","-");
         str = str.replaceAll(",,",",");
@@ -48,6 +51,9 @@ public class MyListAdapter extends ArrayAdapter {
                 Log.i(TAG, "onClick: delete....");
             }
         });
+
+        TextView txtId = (TextView)itemView.findViewById(R.id.textid);
+        txtId.setText(s[0]);
 
         return itemView;
     }
