@@ -58,6 +58,8 @@ public class SettingsActivity extends AppCompatActivity {
             new PrefListener("match_type");
             new PrefListener(getString(R.string.settings_item_less16_key));
             new PrefListener("sure_num");
+            new PrefListener("end_limit");
+            new PrefListener("odd_limit");
             new PrefListener(getString(R.string.settings_endwith_key_set1));
             new PrefListener(getString(R.string.settings_endwith_key_set2));
             new PrefListener(getString(R.string.settings_endwith_key_set3));

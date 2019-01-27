@@ -59,4 +59,40 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+
+    <!-- 尾数限定，个位数个数 -->
+    <string-array name="settings_endlimit_option_label">
+        <item>@string/settings_unlimited</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="settings_endlimit_option_value">
+        <item>-1</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <!-- 单数控制 -->
+    <string-array name="settings_oddlimit_option_label">
+        <item>@string/settings_unlimited</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="settings_oddlimit_option_value">
+        <item>-1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
 </resources>

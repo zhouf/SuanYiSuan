@@ -32,11 +32,21 @@
             android:title="一定出现"
             android:summary="当前值{v}"/>
 
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_endlimit_option_label"
+            android:entryValues="@array/settings_endlimit_option_value"
+            android:key="end_limit"
+            android:summary="当前值{v}"
+            android:title="尾数个位数限定"/>
 
-        <SwitchPreference
-            android:key="less_after"
-            android:title="@string/settings_item_less_than_after"
-            android:defaultValue="false"/>
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/settings_oddlimit_option_label"
+            android:entryValues="@array/settings_oddlimit_option_value"
+            android:key="odd_limit"
+            android:summary="当前值{v}"
+            android:title="单数控制"/>
     </PreferenceCategory>
 
 

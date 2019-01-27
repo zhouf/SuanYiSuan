@@ -21,9 +21,9 @@ public class NumUtil {
      * @param less16 1-16个数
      * @param eqType 是否精确匹配
      */
-    public static void filterData(ArrayList<String> listData, int dan, int zhi, int less16, boolean eqType) {
-        ArrayList<String> removed = new ArrayList<String>();
-        for(String str : listData){
+    public static void filterData(ArrayList<Item> listData, int dan, int zhi, int less16, boolean eqType) {
+        ArrayList<Item> removed = new ArrayList<Item>();
+        for(Item str : listData){
             if(!checkOneOK(dan, zhi, less16, eqType, str)){
                 removed.add(str);
             }
@@ -38,16 +38,16 @@ public class NumUtil {
      * @param zhi
      * @param less16
      * @param eqType
-     * @param str
+     * @param item
      * @return 符合条件返回true
      */
     @Deprecated
-    public static boolean checkOneOK(int dan, int zhi, int less16, boolean eqType, String str) {
+    public static boolean checkOneOK(int dan, int zhi, int less16, boolean eqType, Item item) {
         boolean retVal = true;
-        int[] array = toIntArray(str);
-        int d = countDan(array);
-        int z = countZhi(array);
-        int less = countLess16(array);
+        //int[] array = toIntArray(item);
+        int d = countDan(item);
+        int z = countZhi(item);
+        int less = countLess16(item);
         if(eqType){
             //精确匹配
             if((dan>=0 && d!=dan) || (zhi>=0 && z!=zhi) || (less16>=0 && less!=less16)){
@@ -63,15 +63,15 @@ public class NumUtil {
                 //Log.i(TAG, "filterData: 移除");
             }
         }
-        Log.i(TAG, "filterData:"+str+" d["+d+"] z["+z+"] less["+less+"] ret=" + retVal);
+        Log.i(TAG, "filterData:"+item+" d["+d+"] z["+z+"] less["+less+"] ret=" + retVal);
         return retVal;
     }
 
     //取消了单数和质数的判断
-    public static boolean checkOneOK(int less16, boolean eqType, String str) {
+    public static boolean checkOneOK(int less16, boolean eqType, Item item) {
         boolean retVal = true;
-        int[] array = toIntArray(str);
-        int less = countLess16(array);
+        //int[] array = toIntArray(str);
+        int less = countLess16(item);
         if(eqType){
             //精确匹配
             if(less16>=0 && less!=less16){
@@ -87,7 +87,7 @@ public class NumUtil {
                 //Log.i(TAG, "filterData: 移除");
             }
         }
-        Log.i(TAG, "filterData:"+str+" less["+less+"] ret=" + retVal);
+        Log.i(TAG, "filterData:"+item+" less["+less+"] ret=" + retVal);
         return retVal;
     }
 
@@ -96,9 +96,9 @@ public class NumUtil {
      * @param array
      * @return
      */
-    private static int countDan(int[] array) {
+    private static int countDan(Item array) {
         int ret = 0;
-        for(int i : array){
+        for(int i : array.getData()){
             if(i%2==1){
                 ret++;
             }
@@ -111,9 +111,9 @@ public class NumUtil {
      * @param array
      * @return
      */
-    private static int countZhi(int[] array){
+    private static int countZhi(Item array){
         int ret = 0;
-        for(int i : array){
+        for(int i : array.getData()){
             if(i>=2 && isPrime(i)){
                 ret++;
             }
@@ -122,12 +122,12 @@ public class NumUtil {
     }
     /**
      * 统计1-16个数
-     * @param array
+     * @param it
      * @return
      */
-    private static int countLess16(int[] array){
+    private static int countLess16(Item it){
         int ret = 0;
-        for(int i : array){
+        for(byte i : it.getData()){
             if(i<=16){
                 ret++;
             }

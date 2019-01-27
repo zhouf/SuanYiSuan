@@ -34,13 +34,9 @@ public class MyListAdapter extends ArrayAdapter {
         //stra = 3#1,2,3 第一个是位置
         String s[] = stra.split("#");
         String str = s[1];
+        Item item = (Item)getItem(position);
         TextView title = (TextView) itemView.findViewById(R.id.listText);
-//        str = str.replaceAll(",,",",").replaceAll(",","-");
-        str = str.replaceAll(",,",",");
-        if(str.endsWith(",")){
-            str = str.substring(0,str.length()-1);
-        }
-        title.setText(str);
+        title.setText(item.toString());
 
         ImageView img = (ImageView)itemView.findViewById(R.id.itemImg);
         img.setOnClickListener(new View.OnClickListener() {
@@ -51,9 +47,6 @@ public class MyListAdapter extends ArrayAdapter {
                 Log.i(TAG, "onClick: delete....");
             }
         });
-
-        TextView txtId = (TextView)itemView.findViewById(R.id.textid);
-        txtId.setText(s[0]);
 
         return itemView;
     }

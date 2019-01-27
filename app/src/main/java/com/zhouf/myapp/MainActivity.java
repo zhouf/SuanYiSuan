@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity{
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity{
 
     private final static int MAX = 33;
     private final static int LIMIT = 10000;
-    private final static int RESULT_MAX = 10000; //结果列表最大上限
+    private final static int RESULT_MAX = 1000; //结果列表最大上限
 
     EditText num[] = new EditText[6];
     Spinner select[] = new Spinner[6];
@@ -146,12 +144,14 @@ public class MainActivity extends AppCompatActivity{
         saveData();
 
         btn.setEnabled(false);
-        ArrayList<String> listData = new ArrayList<>();
+        ArrayList<Item> listData = new ArrayList<Item>(LIMIT);
         //前三组数放在lista中
-        ArrayList<String> lista = getArrayList(num[0],select[0]);
+        ArrayList<Item> lista = new ArrayList<Item>(100);
+        getArrayList(lista,num[0],select[0]);
         for (int i=1;i<3;i++){
             Log.i(TAG, "onStartClick: lista["+lista.size()+"]=" + lista);
-            ArrayList<String> listb = getArrayList(num[i],select[i]);
+            ArrayList<Item> listb = new ArrayList<Item>(30);
+            getArrayList(listb,num[i],select[i]);
             Log.i(TAG, "onStartClick: listb=" + listb);
             lista = unionList(lista,listb);
             Log.i(TAG, "run: list.size=" + lista.size());
@@ -163,10 +163,12 @@ public class MainActivity extends AppCompatActivity{
             }
         }
         //后三组数放在listb中
-        ArrayList<String> listb = getArrayList(num[3],select[3]);
+        ArrayList<Item> listb = new ArrayList<Item>(100);
+        getArrayList(listb,num[3],select[3]);
         for (int i=4;i<6;i++){
             Log.i(TAG, "onStartClick: listb["+listb.size()+"]=" + listb);
-            ArrayList<String> listc = getArrayList(num[i],select[i]);
+            ArrayList<Item> listc = new ArrayList<Item>(30);
+            getArrayList(listc,num[i],select[i]);
             Log.i(TAG, "onStartClick: listc=" + listc);
             listb = unionList(listb,listc);
             Log.i(TAG, "run: list.size=" + listb.size());
@@ -191,21 +193,18 @@ public class MainActivity extends AppCompatActivity{
         int sizea = lista.size();
         int sizeb = listb.size();
         int cnta=0,cntb=0,cntc=0;
-        for(String stra : lista){
+        for(Item stra : lista){
             cnta++;
             cntb = 0;
-            for(String strb : listb){
+            for(Item strb : listb){
                 cntb++;
-                StringBuilder builder = new StringBuilder(stra + strb);
-                builder.deleteCharAt(builder.lastIndexOf(","));
-                Log.i(TAG, "onStartClick: builder=" + builder.toString());
                 //sort
-                String sortedStr = sortStr(builder.toString(),useEndwith,endMap,sureNum);
+                Item item = stra.add(strb);
+                boolean isok = sortStr(item,useEndwith,endMap,sureNum);
 
-                Log.i(TAG, "onStartClick: sortedStr=" + sortedStr);
-                if(!TextUtils.isEmpty(sortedStr)){
+                if(isok){
                     cntc++;
-                    listData.add(cntc + "#" + sortedStr);
+                    listData.add(item);
                 }
                 String runstr = String.format("过滤数据a %d/%d,b %d/%d 有效%d",sizea,cnta,sizeb,cntb,cntc);
                 Log.i(TAG, "onStartClick: runstr=" + runstr);
@@ -231,7 +230,7 @@ public class MainActivity extends AppCompatActivity{
         }else {
             Log.i(TAG, "onStartClick: 打开列表窗口");
             Intent listIntent = new Intent(this, MyListActivity.class);
-            listIntent.putStringArrayListExtra("data", listData);
+            listIntent.putExtra("data", listData);
             startActivity(listIntent);
         }
         btn.setEnabled(true);
@@ -272,18 +271,14 @@ public class MainActivity extends AppCompatActivity{
 
     /**
      * 对字串中的数据进行排序
-     * @param s 字串如：3，12，6，8，5
+     * @param item 字串如：3，12，6，8，5
      * @param useEndwith 是否启用尾数过滤
      * @param endMap 尾数过滤设置项
      * @param sureNum 一定会出现的数据，可为空，或2,3
-     * @return 排序后的字串如：3，5，6，8，12
+     * @return 如果符合条件返回true
      */
-    private String sortStr(String s,boolean useEndwith,Map<Integer,Integer> endMap,String sureNum) {
-        String items[] = s.split(",");
-        Integer num[] = new Integer[items.length];
-        for (int i = 0; i < items.length; i++) {
-            num[i] = Integer.valueOf(items[i]);
-        }
+    private boolean sortStr(Item item,boolean useEndwith,Map<Integer,Integer> endMap,String sureNum) {
+        Byte num[] = item.getData().toArray(new Byte[]{});
         Arrays.sort(num);
 
         //判断过滤尾数
@@ -295,7 +290,7 @@ public class MainActivity extends AppCompatActivity{
 
                 //统计尾数是k的数据个数
                 int cnt = 0;
-                for(int n : num){
+                for(byte n : num){
                     //遍历数据进行判断
                     if(n%10==k){
                         cnt++;
@@ -304,27 +299,25 @@ public class MainActivity extends AppCompatActivity{
 
                 if(cnt<limit){
                     //不满足条件，直接返回空
-                    return "";
+                    return false;
                 }
             }
         }
 
         if(sureNum.trim().length()>0){
             //如果有设置一定出现的数字
-            List<Integer> numList = Arrays.asList(num);
             for(String ss : sureNum.split(",")){
-                Integer k1 = Integer.valueOf(ss);
-                if(!numList.contains(k1)){
-                    return "";
+                Byte k1 = Byte.valueOf(ss);
+                if(!item.getData().contains(k1)){
+                    return false;
                 }
             }
         }
 
+        //重置排序后的数据
+        item.reset(num);
 
-
-        String retStr = Arrays.toString(num);
-        retStr = retStr.substring(1, retStr.length()-1).replaceAll(" ", "");
-        return retStr;
+        return true;
     }
 
     /**
@@ -333,46 +326,32 @@ public class MainActivity extends AppCompatActivity{
      * @param listb
      * @return
      */
-    private ArrayList<String> unionList(ArrayList<String> lista, ArrayList<String> listb) {
-        ArrayList<String> retList = new ArrayList<>();
+    private ArrayList<Item> unionList(ArrayList<Item> lista, ArrayList<Item> listb) {
         int lena = lista.size();
         int lenb = listb.size();
+        ArrayList<Item> retList = null;
 
         if(lena==0 && lenb==0){
-            return retList;
+            return lista;
         }else if(lena==0 && lenb>0){
             return listb;
         }else if(lena>=0 && lenb==0){
             return lista;
         }else{
+            retList = new ArrayList<>(lena*lenb);
             //两个集合都包含元素，对符合条件的数据进行判断
             boolean useConfig = sharedPrefs.getBoolean("use_setting",false);
-            boolean lessAfter = sharedPrefs.getBoolean("less_after",false);//前面的数比后面数小
             String matchType = sharedPrefs.getString("match_type","");
             eqType = getString(R.string.settings_item_option_equals).equals(matchType);
             //useConfig = false;
             Log.i(TAG, "unionList: less16=" + less16 + " eqType=" + eqType);
 
-
             int addCounter = 0;
-            for(String stra : lista){
-                int maxa = maxNum(stra);
-
-                for(String strb : listb){
-                    if(lessAfter){
-                        //在listb中查找是否有小于maxa的数
-                        boolean pass = true;
-                        for(String sb : strb.split(",")){
-                            int b = Integer.valueOf(sb).intValue();
-                            if(b<maxa){
-                                pass = false;
-                                break;
-                            }
-                        }
-                        if(!pass)   continue;//找下一组b，否则继续执行后面的操作
-                    }
-                    if(!(useConfig && !NumUtil.checkOneOK(less16,eqType,stra+strb))){
-                        retList.add(stra + strb);
+            for(Item stra : lista){
+                for(Item strb : listb){
+                    Item itemc = stra.add(strb);
+                    if(!(useConfig && !NumUtil.checkOneOK(less16,eqType,itemc))){
+                        retList.add(itemc);
                         addCounter++;
                         if(addCounter>LIMIT){
                             //如果有超过上限，退出
@@ -387,24 +366,14 @@ public class MainActivity extends AppCompatActivity{
         return retList;
     }
 
-    //求字符串中的最大值11,12,15
-    private int maxNum(String stra) {
-        int max = 0;
-        for(String sa : stra.split(",")){
-            int a = Integer.valueOf(sa).intValue();
-            if(a>max)   max = a;
-        }
-        return max;
-    }
-
 
     /**
      * 返回列表集合
+     * @param list 返回的数据项
      * @param editText 输入的文本控件
      * @param spinner 下拉列表，选用多少个数据
-     * @return 返回从文本中自由组合的符合下拉列表个数的集合
      */
-    private ArrayList<String> getArrayList(EditText editText, Spinner spinner) {
+    private void getArrayList(ArrayList<Item> list,EditText editText, Spinner spinner) {
         //ArrayList<Integer> retList = new ArrayList<Integer>();
         String str = editText.getText().toString();
         int limit = spinner.getSelectedItemPosition();  //0,1,2
@@ -413,9 +382,11 @@ public class MainActivity extends AppCompatActivity{
             limit++;
         }
         Log.i(TAG, "getArrayList: str=" + str + " limit=" + limit);
-        ArrayList<String> resultList = NumUtil.getList(str,limit);
+        //ArrayList<String> resultList = NumUtil.getList(str,limit);
+        for(String s : NumUtil.getList(str,limit)){
+            list.add(new Item(s));
+        }
 
-        return resultList;
     }
 
     private void saveData() {

@@ -16,7 +16,7 @@ public class MyListActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final ArrayList<String> data = getIntent().getStringArrayListExtra("data");
+        final ArrayList<Item> data = (ArrayList<Item>)getIntent().getSerializableExtra("data");
 
         final MyListAdapter adapter = new MyListAdapter(MyListActivity.this,R.layout.list_item,data);
         setListAdapter(adapter);
