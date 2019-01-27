@@ -32,6 +32,11 @@
             android:title="一定出现"
             android:summary="当前值{v}"/>
 
+        <SwitchPreference
+            android:key="less_after"
+            android:title="@string/settings_item_less_than_after"
+            android:defaultValue="false"/>
+
         <ListPreference
             android:defaultValue="-1"
             android:entries="@array/settings_endlimit_option_label"

@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class MyListAdapter extends ArrayAdapter {
 
     private static final String TAG = "MyListAdapter";
-    private ArrayList<String> list;
+    private ArrayList<Item> list;
 
-    public MyListAdapter(Context context, int resource, ArrayList<String> list) {
+    public MyListAdapter(Context context, int resource, ArrayList<Item> list) {
         super(context, resource, list);
         this.list = list;
     }
@@ -29,11 +29,6 @@ public class MyListAdapter extends ArrayAdapter {
         if(itemView == null){
             itemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item,parent,false);
         }
-
-        String stra = (String)getItem(position);
-        //stra = 3#1,2,3 第一个是位置
-        String s[] = stra.split("#");
-        String str = s[1];
         Item item = (Item)getItem(position);
         TextView title = (TextView) itemView.findViewById(R.id.listText);
         title.setText(item.toString());
@@ -47,6 +42,9 @@ public class MyListAdapter extends ArrayAdapter {
                 Log.i(TAG, "onClick: delete....");
             }
         });
+
+        TextView txtId = (TextView)itemView.findViewById(R.id.textid);
+        txtId.setText(String.valueOf(item.getSeq()));
 
         return itemView;
     }

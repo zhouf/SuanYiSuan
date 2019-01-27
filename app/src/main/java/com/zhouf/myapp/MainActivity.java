@@ -19,7 +19,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -185,6 +187,9 @@ public class MainActivity extends AppCompatActivity{
         eqType = getString(R.string.settings_item_option_equals).equals(matchType);*/
 
         Log.i(TAG, "onStartClick: lista.size=" + lista.size() + " listb.size=" + listb.size());
+
+        byte endLimit = Byte.parseByte(sharedPrefs.getString("end_limit","0"));//尾数个位数限定
+        byte oddLimit = Byte.parseByte(sharedPrefs.getString("odd_limit","0"));//单数控制
         //过滤尾数设置
         boolean useEndwith = sharedPrefs.getBoolean("use_endwith",false);
         String sureNum = sharedPrefs.getString("sure_num","");
@@ -200,10 +205,11 @@ public class MainActivity extends AppCompatActivity{
                 cntb++;
                 //sort
                 Item item = stra.add(strb);
-                boolean isok = sortStr(item,useEndwith,endMap,sureNum);
+                boolean isok = sortStr(item,useEndwith,endMap,sureNum,endLimit,oddLimit);
 
                 if(isok){
                     cntc++;
+                    item.setSeq(cntc);
                     listData.add(item);
                 }
                 String runstr = String.format("过滤数据a %d/%d,b %d/%d 有效%d",sizea,cnta,sizeb,cntb,cntc);
@@ -277,7 +283,7 @@ public class MainActivity extends AppCompatActivity{
      * @param sureNum 一定会出现的数据，可为空，或2,3
      * @return 如果符合条件返回true
      */
-    private boolean sortStr(Item item,boolean useEndwith,Map<Integer,Integer> endMap,String sureNum) {
+    private boolean sortStr(Item item,boolean useEndwith,Map<Integer,Integer> endMap,String sureNum,byte endLimit,byte oddLimit) {
         Byte num[] = item.getData().toArray(new Byte[]{});
         Arrays.sort(num);
 
@@ -301,6 +307,31 @@ public class MainActivity extends AppCompatActivity{
                     //不满足条件，直接返回空
                     return false;
                 }
+            }
+        }
+
+
+        if(endLimit>0){
+            //如果要进行尾数个位数限定
+            Set<Byte> sets = new HashSet<Byte>();
+            for(Byte b : num){
+                sets.add((byte)(b%10));
+            }
+            if(sets.size()>endLimit){
+                return false;//不符合条件
+            }
+        }
+
+        if(oddLimit>0){
+            //如果要进行奇数个数验证
+            byte oddcnt = 0;
+            for(byte b : num){
+                if(b%2==1){
+                    oddcnt++;
+                }
+            }
+            if(oddcnt!=oddLimit){
+                return false;//不符合条件
             }
         }
 
@@ -341,6 +372,8 @@ public class MainActivity extends AppCompatActivity{
             retList = new ArrayList<>(lena*lenb);
             //两个集合都包含元素，对符合条件的数据进行判断
             boolean useConfig = sharedPrefs.getBoolean("use_setting",false);
+            boolean lessAfter = sharedPrefs.getBoolean("less_after",false);//前面的数比后面数小
+
             String matchType = sharedPrefs.getString("match_type","");
             eqType = getString(R.string.settings_item_option_equals).equals(matchType);
             //useConfig = false;
@@ -348,7 +381,21 @@ public class MainActivity extends AppCompatActivity{
 
             int addCounter = 0;
             for(Item stra : lista){
+                byte maxa = stra.maxVal();
+
                 for(Item strb : listb){
+                    if(lessAfter){
+                        //在listb中查找是否有小于maxa的数
+                        boolean pass = true;
+                        for(byte b : strb.getData()){
+                            if(b<maxa){
+                                pass = false;
+                                break;
+                            }
+                        }
+                        if(!pass)   continue;//找下一组b，否则继续执行后面的操作
+                    }
+
                     Item itemc = stra.add(strb);
                     if(!(useConfig && !NumUtil.checkOneOK(less16,eqType,itemc))){
                         retList.add(itemc);
