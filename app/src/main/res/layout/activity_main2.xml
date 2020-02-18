@@ -263,33 +263,40 @@
 
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/cb3dan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="3单" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
 
-        <CheckBox
-            android:id="@+id/cb3shuang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="3双" />
+            <RadioButton
+                android:id="@+id/r3dan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="3单" />
+            <RadioButton
+                android:id="@+id/r3shuang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="3双" />
+            <RadioButton
+                android:id="@+id/r2dan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2单" />
+            <RadioButton
+                android:id="@+id/r2shuang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2双" />
+        </RadioGroup>
 
-        <CheckBox
-            android:id="@+id/cb2dan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="2单" />
 
-        <CheckBox
-            android:id="@+id/cb2shuang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="2双" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -311,6 +318,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="quanji"
                 android:text="@string/main2_btn_all_ji" />
 
             <Button
@@ -318,6 +326,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="quanou"
                 android:text="@string/main2_btn_all_ou" />
 
             <Button
@@ -325,6 +334,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="quanzhi"
                 android:text="@string/main2_btn_all_zhi" />
 
             <Button
@@ -332,6 +342,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="quanhe"
                 android:text="@string/main2_btn_all_he" />
         </LinearLayout>
 

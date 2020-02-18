@@ -85,4 +85,30 @@ public class Main2Activity extends AppCompatActivity {
             ck.setChecked(!ck.isChecked());
         }
     }
+
+    //全奇，全偶，全质，全合
+    public void quanji(View btn){
+        for(int i=1;i<=27;i+=2){
+            ckBoxNumAll[i].setChecked(true);
+        }
+    }
+    public void quanou(View btn){
+        for(int i=0;i<27;i+=2){
+            ckBoxNumAll[i].setChecked(true);
+        }
+    }
+    public void quanzhi(View btn){
+        for(int i=2;i<=27;i++){
+            if(NumUtil.isPrime(i)){
+                ckBoxNumAll[i].setChecked(true);
+            }
+        }
+    }
+    public void quanhe(View btn){
+        for(int i=2;i<=27;i++){
+            if(!NumUtil.isPrime(i)){
+                ckBoxNumAll[i].setChecked(true);
+            }
+        }
+    }
 }

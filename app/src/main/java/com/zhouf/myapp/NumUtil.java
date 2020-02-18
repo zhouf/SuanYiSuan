@@ -135,7 +135,7 @@ public class NumUtil {
         return ret;
     }
 
-    private static boolean isPrime(int n) {
+    public static boolean isPrime(int n) {
         if (n < 2) return false;
         for (int i = 2; i < n; ++i)
             if (n % i == 0) return false;
