@@ -5,8 +5,8 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -27,11 +27,11 @@ public class SettingsActivity extends AppCompatActivity {
                 Preference preference = findPreference(key);
                 format = preference.getSummary().toString();
 
-                if (EditTextPreference.class.isInstance(preference)) {
+                if (preference instanceof EditTextPreference) {
                     // EditText
                     EditTextPreference etp = (EditTextPreference) preference;
                     onPreferenceChange(preference, etp.getText());
-                } else if (ListPreference.class.isInstance(preference)) {
+                } else if (preference instanceof ListPreference) {
                     // List
                     ListPreference lp = (ListPreference) preference;
                     onPreferenceChange(preference, lp.getValue());

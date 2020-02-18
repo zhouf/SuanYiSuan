@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity{
     private final static int LIMIT = 10000;
     private final static int RESULT_MAX = 1000; //结果列表最大上限
 
-    EditText num[] = new EditText[6];
-    Spinner select[] = new Spinner[6];
+    EditText[] num = new EditText[6];
+    Spinner[] select = new Spinner[6];
     CheckBox saved;
     TextView configTip;
     int less16;
@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        int numArray[] = {R.id.num1,R.id.num2,R.id.num3,R.id.num4,R.id.num5,R.id.num6};
-        int spinnerArray[] = {R.id.spinner1,R.id.spinner2,R.id.spinner3,R.id.spinner4,R.id.spinner5,R.id.spinner6};
+        int[] numArray = {R.id.num1, R.id.num2, R.id.num3, R.id.num4, R.id.num5, R.id.num6};
+        int[] spinnerArray = {R.id.spinner1,R.id.spinner2,R.id.spinner3,R.id.spinner4,R.id.spinner5,R.id.spinner6};
 
         for(int i=0;i<6;i++){
 
@@ -73,10 +73,10 @@ public class MainActivity extends AppCompatActivity{
         if(useConfig){
             tipstr = "使用过滤条件，" + matchType + "(1~16:"+less16+")";
         }
-        if(sureNum!=null && sureNum.length()>0){
+        if(sureNum.length() > 0){
             tipstr = "["+sureNum+"]" + tipstr;
         }
-        if(useEndwith && endwithStr!=null && endwithStr.length()>0){
+        if(useEndwith && endwithStr.length() > 0){
             tipstr = tipstr.length()>2? (tipstr + endwithStr) : endwithStr;
         }
 
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity{
 
         int sizea = lista.size();
         int sizeb = listb.size();
-        int cnta=0,cntb=0,cntc=0;
+        int cnta=0,cntb,cntc=0;
         for(Item stra : lista){
             cnta++;
             cntb = 0;
