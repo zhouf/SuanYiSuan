@@ -3,8 +3,14 @@ package com.zhouf.myapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Spinner;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
     private int[] ckida = {R.id.numa0,R.id.numa1,R.id.numa2,R.id.numa3,R.id.numa4,R.id.numa5,R.id.numa6,R.id.numa7,R.id.numa8,R.id.numa9};
@@ -16,6 +22,8 @@ public class Main2Activity extends AppCompatActivity {
     private CheckBox[] ckBoxc;
     private CheckBox[] ckBoxAll;
     private CheckBox[] ckBoxNumAll;
+    private Spinner spinner;
+    private static final String TAG = "Main2Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +31,8 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         initCheckbox();
+
+        spinner = findViewById(R.id.spinner);
     }
 
     private void initCheckbox(){
@@ -109,6 +119,91 @@ public class Main2Activity extends AppCompatActivity {
             if(!NumUtil.isPrime(i)){
                 ckBoxNumAll[i].setChecked(true);
             }
+        }
+    }
+
+    //查看结果
+    public void show(View btn){
+        List<Pair> list = mergePair(getList(ckBoxa),getList(ckBoxb),getList(ckBoxc));
+        Log.i(TAG, "show: list.size=" + list.size());
+        for(Pair p : filterA(list)){
+            Log.i(TAG, "show: i=" + p.getIntval());
+        }
+        Log.i(TAG, "show: spinner:" + spinner.getSelectedItem() + " p=" + spinner.getSelectedItemPosition());
+    }
+
+    private List<Pair> mergePair(List<Byte> lista,List<Byte> listb,List<Byte> listc){
+        List<Pair> retList = new ArrayList<Pair>(1000);
+        for(byte a : lista) {
+            for (byte b : listb) {
+                for (byte c : listc) {
+                    retList.add(new Pair(a, b, c));
+                }
+            }
+        }
+        return retList;
+    }
+
+    private List<Pair> filterA(List<Pair> list){
+        //进行筛选
+        List<Pair> retList = new ArrayList<>(list.size());
+        switch (spinner.getSelectedItemPosition()){
+            case 0:
+                //分组，000，111，222，333...
+                for(Pair p : list){
+                    if(p.isType0()){
+                        retList.add(p);
+                    }
+                }
+                break;
+            case 1:
+                //顺子
+                for(Pair p : list){
+                    if(p.isType1()){
+                        retList.add(p);
+                    }
+                }
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
+        return retList;
+    }
+
+    private List<Byte> getList(CheckBox[] ckboxs){
+        List<Byte> retList = new ArrayList<>();
+        for(byte i=0;i< ckboxs.length;i++){
+            if(ckboxs[i].isChecked()){
+                retList.add(i);
+            }
+        }
+        return retList;
+    }
+
+    class Pair{
+        byte a,b,c;
+        Pair(byte a1,byte b1,byte c1){
+            this.a = a1;
+            this.b = b1;
+            this.c = c1;
+        }
+
+        int getIntval(){
+            return a*100+b*10+c;
+        }
+        boolean isType0(){
+            return a==b && a==c;
+        }
+        boolean isType1(){
+            //顺子
+            byte max = a>b? (a>c? a : c) : (b>c? b : c);
+            byte min = a<b? (a<c? a : c) : (b<c? b : c);
+            byte mid = (byte) (a+b+c-max-min);
+            return min+1==mid && mid+1==max;
         }
     }
 }

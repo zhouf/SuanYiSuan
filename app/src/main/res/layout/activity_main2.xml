@@ -520,9 +520,10 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btn2_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="show"
         android:text="@string/main2_btn_show" />
 
 
