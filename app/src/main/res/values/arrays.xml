@@ -95,4 +95,20 @@
         <item>6</item>
         <item>7</item>
     </string-array>
+
+    <!-- 方法二的几个过滤条件 -->
+    <string-array name="main2_filter_option_label">
+        <item>分组</item>
+        <item>顺子</item>
+        <item>等差</item>
+        <item>对子</item>
+        <item>组六</item>
+    </string-array>
+    <string-array name="main2_filter_option_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>
