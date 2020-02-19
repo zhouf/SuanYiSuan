@@ -1,5 +1,7 @@
 package com.zhouf.myapp;
 
+import androidx.annotation.NonNull;
+
 public class Pair {
     byte a,b,c;
     Pair(byte a1,byte b1,byte c1){
@@ -11,6 +13,12 @@ public class Pair {
     int getIntval(){
         return a*100+b*10+c;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d%d%d",a,b,c);
+    }
+
     boolean isType0(){
         return a==b && a==c;
     }

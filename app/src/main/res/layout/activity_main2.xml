@@ -1,531 +1,552 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="16dp"
+    android:layout_height="wrap_content"
     tools:context=".Main2Activity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="百"
-            android:textSize="25sp"/>
-        <CheckBox
-            android:id="@+id/numa0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check0"/>
-        <CheckBox
-            android:id="@+id/numa1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check1"/>
-        <CheckBox
-            android:id="@+id/numa2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check2"/>
-        <CheckBox
-            android:id="@+id/numa3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check3"/>
-        <CheckBox
-            android:id="@+id/numa4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check4"/>
-        <CheckBox
-            android:id="@+id/numa5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check5"/>
-        <CheckBox
-            android:id="@+id/numa6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check6"/>
-        <CheckBox
-            android:id="@+id/numa7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check7"/>
-        <CheckBox
-            android:id="@+id/numa8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check8"/>
-        <CheckBox
-            android:id="@+id/numa9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check9"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="十"
-            android:textSize="25sp" />
-        <CheckBox
-            android:id="@+id/numb0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check0"/>
-        <CheckBox
-            android:id="@+id/numb1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check1"/>
-        <CheckBox
-            android:id="@+id/numb2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check2"/>
-        <CheckBox
-            android:id="@+id/numb3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check3"/>
-        <CheckBox
-            android:id="@+id/numb4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check4"/>
-        <CheckBox
-            android:id="@+id/numb5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check5"/>
-        <CheckBox
-            android:id="@+id/numb6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check6"/>
-        <CheckBox
-            android:id="@+id/numb7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check7"/>
-        <CheckBox
-            android:id="@+id/numb8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check8"/>
-        <CheckBox
-            android:id="@+id/numb9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check9"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="个"
-            android:textSize="25sp" />
-        <CheckBox
-            android:id="@+id/numc0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check0"/>
-        <CheckBox
-            android:id="@+id/numc1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check1"/>
-        <CheckBox
-            android:id="@+id/numc2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check2"/>
-        <CheckBox
-            android:id="@+id/numc3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check3"/>
-        <CheckBox
-            android:id="@+id/numc4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check4"/>
-        <CheckBox
-            android:id="@+id/numc5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check5"/>
-        <CheckBox
-            android:id="@+id/numc6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check6"/>
-        <CheckBox
-            android:id="@+id/numc7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check7"/>
-        <CheckBox
-            android:id="@+id/numc8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check8"/>
-        <CheckBox
-            android:id="@+id/numc9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/check9"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="?android:attr/buttonBarStyle"
-        android:layout_gravity="center">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="selectAll"
-            android:text="@string/main2_btn_select_all" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="resetAll"
-            android:text="@string/main2_btn_reset_all"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="reservSel"
-            android:text="@string/main2_btn_reverse_sel"/>
-
-    </LinearLayout>
-
-
-    <View
-        android:id="@+id/divider2"
+        android:paddingTop="16dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
-
-    <LinearLayout
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:text="筛选" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:entries="@array/main2_filter_option_label" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-
-        android:orientation="horizontal">
-
-        <RadioGroup
-            android:id="@+id/rgroup"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1" >
-
-            <RadioButton
-                android:id="@+id/r3dan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="3单" />
-            <RadioButton
-                android:id="@+id/r3shuang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="3双" />
-            <RadioButton
-                android:id="@+id/r2dan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2单" />
-            <RadioButton
-                android:id="@+id/r2shuang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2双" />
-        </RadioGroup>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/layoutborder"
-        style="?android:attr/buttonBarStyle"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center">
 
-            <Button
-                android:id="@+id/btn_all_ji"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="quanji"
-                android:text="@string/main2_btn_all_ji" />
-
-            <Button
-                android:id="@+id/btn_all_ou"
+                android:text="百"
+                android:textSize="25sp"/>
+            <CheckBox
+                android:id="@+id/numa0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="quanou"
-                android:text="@string/main2_btn_all_ou" />
-
-            <Button
-                android:id="@+id/btn_all_zhi"
+                android:button="@drawable/check0"/>
+            <CheckBox
+                android:id="@+id/numa1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="quanzhi"
-                android:text="@string/main2_btn_all_zhi" />
-
-            <Button
-                android:id="@+id/btn_all_he"
+                android:button="@drawable/check1"/>
+            <CheckBox
+                android:id="@+id/numa2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="quanhe"
-                android:text="@string/main2_btn_all_he" />
-        </LinearLayout>
+                android:button="@drawable/check2"/>
+            <CheckBox
+                android:id="@+id/numa3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check3"/>
+            <CheckBox
+                android:id="@+id/numa4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check4"/>
+            <CheckBox
+                android:id="@+id/numa5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check5"/>
+            <CheckBox
+                android:id="@+id/numa6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check6"/>
+            <CheckBox
+                android:id="@+id/numa7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check7"/>
+            <CheckBox
+                android:id="@+id/numa8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check8"/>
+            <CheckBox
+                android:id="@+id/numa9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check9"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/ck_filter_num0"
-                style="@style/ckbox_style"
-                android:text="0" />
-            <CheckBox
-                android:id="@+id/ck_filter_num1"
-                style="@style/ckbox_style"
-                android:text="1" />
-            <CheckBox
-                android:id="@+id/ck_filter_num2"
-                style="@style/ckbox_style"
-                android:text="2" />
-            <CheckBox
-                android:id="@+id/ck_filter_num3"
-                style="@style/ckbox_style"
-                android:text="3" />
-            <CheckBox
-                android:id="@+id/ck_filter_num4"
-                style="@style/ckbox_style"
-                android:text="4" />
-            <CheckBox
-                android:id="@+id/ck_filter_num5"
-                style="@style/ckbox_style"
-                android:text="5" />
-            <CheckBox
-                android:id="@+id/ck_filter_num6"
-                style="@style/ckbox_style"
-                android:text="6" />
-            <CheckBox
-                android:id="@+id/ck_filter_num7"
-                style="@style/ckbox_style"
-                android:text="7" />
-            <CheckBox
-                android:id="@+id/ck_filter_num8"
-                style="@style/ckbox_style"
-                android:text="8" />
-            <CheckBox
-                android:id="@+id/ck_filter_num9"
-                style="@style/ckbox_style"
-                android:text="9" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/ck_filter_num10"
-                style="@style/ckbox_style"
-                android:text="10" />
-            <CheckBox
-                android:id="@+id/ck_filter_num11"
-                style="@style/ckbox_style"
-                android:text="11" />
-            <CheckBox
-                android:id="@+id/ck_filter_num12"
-                style="@style/ckbox_style"
-                android:text="12" />
-            <CheckBox
-                android:id="@+id/ck_filter_num13"
-                style="@style/ckbox_style"
-                android:text="13" />
-            <CheckBox
-                android:id="@+id/ck_filter_num14"
-                style="@style/ckbox_style"
-                android:text="14" />
-            <CheckBox
-                android:id="@+id/ck_filter_num15"
-                style="@style/ckbox_style"
-                android:text="15" />
-            <CheckBox
-                android:id="@+id/ck_filter_num16"
-                style="@style/ckbox_style"
-                android:text="16" />
-            <CheckBox
-                android:id="@+id/ck_filter_num17"
-                style="@style/ckbox_style"
-                android:text="17" />
-            <CheckBox
-                android:id="@+id/ck_filter_num18"
-                style="@style/ckbox_style"
-                android:text="18" />
-            <CheckBox
-                android:id="@+id/ck_filter_num19"
-                style="@style/ckbox_style"
-                android:text="19" />
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="十"
+                android:textSize="25sp" />
             <CheckBox
-                android:id="@+id/ck_filter_num20"
-                style="@style/ckbox_style"
-                android:text="20" />
+                android:id="@+id/numb0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check0"/>
             <CheckBox
-                android:id="@+id/ck_filter_num21"
-                style="@style/ckbox_style"
-                android:text="21" />
+                android:id="@+id/numb1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check1"/>
             <CheckBox
-                android:id="@+id/ck_filter_num22"
-                style="@style/ckbox_style"
-                android:text="22" />
+                android:id="@+id/numb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check2"/>
             <CheckBox
-                android:id="@+id/ck_filter_num23"
-                style="@style/ckbox_style"
-                android:text="23" />
+                android:id="@+id/numb3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check3"/>
             <CheckBox
-                android:id="@+id/ck_filter_num24"
-                style="@style/ckbox_style"
-                android:text="24" />
+                android:id="@+id/numb4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check4"/>
             <CheckBox
-                android:id="@+id/ck_filter_num25"
-                style="@style/ckbox_style"
-                android:text="25" />
+                android:id="@+id/numb5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check5"/>
             <CheckBox
-                android:id="@+id/ck_filter_num26"
-                style="@style/ckbox_style"
-                android:text="26" />
+                android:id="@+id/numb6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check6"/>
             <CheckBox
-                android:id="@+id/ck_filter_num27"
-                style="@style/ckbox_style"
-                android:text="27" />
-
+                android:id="@+id/numb7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check7"/>
             <CheckBox
-                style="@style/ckbox_style2"/>
+                android:id="@+id/numb8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check8"/>
             <CheckBox
-                style="@style/ckbox_style2"/>
+                android:id="@+id/numb9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check9"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="40dp"
+            android:layout_gravity="center">
 
-            <Button
-                android:id="@+id/btn_filter_sel_all"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="numSelectAll"
+                android:text="个"
+                android:textSize="25sp" />
+            <CheckBox
+                android:id="@+id/numc0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check0"/>
+            <CheckBox
+                android:id="@+id/numc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check1"/>
+            <CheckBox
+                android:id="@+id/numc2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check2"/>
+            <CheckBox
+                android:id="@+id/numc3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check3"/>
+            <CheckBox
+                android:id="@+id/numc4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check4"/>
+            <CheckBox
+                android:id="@+id/numc5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check5"/>
+            <CheckBox
+                android:id="@+id/numc6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check6"/>
+            <CheckBox
+                android:id="@+id/numc7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check7"/>
+            <CheckBox
+                android:id="@+id/numc8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check8"/>
+            <CheckBox
+                android:id="@+id/numc9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check9"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarStyle"
+            android:layout_gravity="center">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="selectAll"
                 android:text="@string/main2_btn_select_all" />
-
             <Button
-                android:id="@+id/btn_filter_reset_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="numResetAll"
-                android:text="@string/main2_btn_reset_all" />
-
+                android:onClick="resetAll"
+                android:text="@string/main2_btn_reset_all"/>
             <Button
-                android:id="@+id/btn_filter_reverse_sel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="numReservSel"
-                android:text="@string/main2_btn_reverse_sel" />
+                android:onClick="reservSel"
+                android:text="@string/main2_btn_reverse_sel"/>
+
         </LinearLayout>
+
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/ck_filter10"
+                style="@style/ckbox_style"
+                android:text="分组" />
+            <CheckBox
+                android:id="@+id/ck_filter11"
+                style="@style/ckbox_style"
+                android:text="顺子" />
+            <CheckBox
+                android:id="@+id/ck_filter12"
+                style="@style/ckbox_style"
+                android:text="等差" />
+            <CheckBox
+                android:id="@+id/ck_filter13"
+                style="@style/ckbox_style"
+                android:text="对子" />
+            <CheckBox
+                android:id="@+id/ck_filter14"
+                style="@style/ckbox_style"
+                android:text="组六" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/rgroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+
+                <RadioButton
+                    android:id="@+id/r3dan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="3单" />
+                <RadioButton
+                    android:id="@+id/r3shuang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="3双" />
+                <RadioButton
+                    android:id="@+id/r2dan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2单" />
+                <RadioButton
+                    android:id="@+id/r2shuang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2双" />
+            </RadioGroup>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layoutborder"
+            style="?android:attr/buttonBarStyle"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_all_ji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="quanji"
+                    android:text="@string/main2_btn_all_ji" />
+
+                <Button
+                    android:id="@+id/btn_all_ou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="quanou"
+                    android:text="@string/main2_btn_all_ou" />
+
+                <Button
+                    android:id="@+id/btn_all_zhi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="quanzhi"
+                    android:text="@string/main2_btn_all_zhi" />
+
+                <Button
+                    android:id="@+id/btn_all_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="quanhe"
+                    android:text="@string/main2_btn_all_he" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/ck_filter_num0"
+                    style="@style/ckbox_style"
+                    android:text="0" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num1"
+                    style="@style/ckbox_style"
+                    android:text="1" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num2"
+                    style="@style/ckbox_style"
+                    android:text="2" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num3"
+                    style="@style/ckbox_style"
+                    android:text="3" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num4"
+                    style="@style/ckbox_style"
+                    android:text="4" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num5"
+                    style="@style/ckbox_style"
+                    android:text="5" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num6"
+                    style="@style/ckbox_style"
+                    android:text="6" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num7"
+                    style="@style/ckbox_style"
+                    android:text="7" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num8"
+                    style="@style/ckbox_style"
+                    android:text="8" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num9"
+                    style="@style/ckbox_style"
+                    android:text="9" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/ck_filter_num10"
+                    style="@style/ckbox_style"
+                    android:text="10" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num11"
+                    style="@style/ckbox_style"
+                    android:text="11" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num12"
+                    style="@style/ckbox_style"
+                    android:text="12" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num13"
+                    style="@style/ckbox_style"
+                    android:text="13" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num14"
+                    style="@style/ckbox_style"
+                    android:text="14" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num15"
+                    style="@style/ckbox_style"
+                    android:text="15" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num16"
+                    style="@style/ckbox_style"
+                    android:text="16" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num17"
+                    style="@style/ckbox_style"
+                    android:text="17" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num18"
+                    style="@style/ckbox_style"
+                    android:text="18" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num19"
+                    style="@style/ckbox_style"
+                    android:text="19" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/ck_filter_num20"
+                    style="@style/ckbox_style"
+                    android:text="20" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num21"
+                    style="@style/ckbox_style"
+                    android:text="21" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num22"
+                    style="@style/ckbox_style"
+                    android:text="22" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num23"
+                    style="@style/ckbox_style"
+                    android:text="23" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num24"
+                    style="@style/ckbox_style"
+                    android:text="24" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num25"
+                    style="@style/ckbox_style"
+                    android:text="25" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num26"
+                    style="@style/ckbox_style"
+                    android:text="26" />
+                <CheckBox
+                    android:id="@+id/ck_filter_num27"
+                    style="@style/ckbox_style"
+                    android:text="27" />
+
+                <CheckBox
+                    style="@style/ckbox_style2"/>
+                <CheckBox
+                    style="@style/ckbox_style2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_filter_sel_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="numSelectAll"
+                    android:text="@string/main2_btn_select_all" />
+
+                <Button
+                    android:id="@+id/btn_filter_reset_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="numResetAll"
+                    android:text="@string/main2_btn_reset_all" />
+
+                <Button
+                    android:id="@+id/btn_filter_reverse_sel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="numReservSel"
+                    android:text="@string/main2_btn_reverse_sel" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn2_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="show"
+            android:text="@string/main2_btn_show" />
+
+        <TextView
+            android:id="@+id/showout"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="TextView" />
+
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn2_show"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="show"
-        android:text="@string/main2_btn_show" />
-
-
-</LinearLayout>
+</ScrollView >
