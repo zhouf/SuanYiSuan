@@ -26,7 +26,10 @@ public class Item implements Serializable {
                 }
             }
         }
-
+    }
+    Item(int s,String str){
+        this(str);
+        seq = s;
     }
 
     public int getSeq() {

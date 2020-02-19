@@ -2,13 +2,17 @@ package com.zhouf.myapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +27,8 @@ public class Main2Activity extends AppCompatActivity {
     private CheckBox[] ckBoxAll;
     private CheckBox[] ckBoxNumAll;
     private Spinner spinner;
+    private RadioGroup radioGroup;
+    private RadioButton radio3d,radio3s,radio2d,radio2s;
     private static final String TAG = "Main2Activity";
 
     @Override
@@ -33,6 +39,27 @@ public class Main2Activity extends AppCompatActivity {
         initCheckbox();
 
         spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.i(TAG, "onItemSelected: " + parent.getSelectedItemPosition());
+                radio3d.setChecked(false);
+                radio3s.setChecked(false);
+                radio2d.setChecked(false);
+                radio2s.setChecked(false);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        radioGroup = findViewById(R.id.rgroup);
+        radio3d = findViewById(R.id.r3dan);
+        radio3s = findViewById(R.id.r3shuang);
+        radio2d = findViewById(R.id.r2dan);
+        radio2s = findViewById(R.id.r2shuang);
     }
 
     private void initCheckbox(){
@@ -122,16 +149,69 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
-    //查看结果
-    public void show(View btn){
-        List<Pair> list = mergePair(getList(ckBoxa),getList(ckBoxb),getList(ckBoxc));
-        Log.i(TAG, "show: list.size=" + list.size());
-        for(Pair p : filterA(list)){
-            Log.i(TAG, "show: i=" + p.getIntval());
+    public byte getRadioSelect(){
+        //用数字返回单数个数，用radioGroup.getCheckedRadioButtonId()，会清不掉之前的选择
+        byte ret = -1;
+        if(radio3d.isChecked()){
+            ret = 3;
+        }else if(radio3s.isChecked()){
+            ret = 0;
+        }else if(radio2d.isChecked()){
+            ret = 2;
+        }else if(radio2s.isChecked()){
+            ret = 1;
         }
-        Log.i(TAG, "show: spinner:" + spinner.getSelectedItem() + " p=" + spinner.getSelectedItemPosition());
+        return ret;
     }
 
+    public List<Byte> getSelect3(){
+        //获取第三组过滤数据列表
+        List<Byte> retList = new ArrayList<Byte>(30);
+        for(byte i=0;i<ckBoxNumAll.length;i++){
+            if(ckBoxNumAll[i].isChecked()){
+                retList.add(i);
+            }
+        }
+        return retList;
+    }
+
+    //查看结果
+    public void show(View btn){
+        MyBuilder.Builder builder = MyBuilder.build(getList(ckBoxa),getList(ckBoxb),getList(ckBoxc));
+
+        List<Pair> list = builder.filterA(spinner.getSelectedItemPosition()).getList();
+//        List<Pair> list = mergePair(getList(ckBoxa),getList(ckBoxb),getList(ckBoxc));
+        Log.i(TAG, "show: list.size=" + list.size());
+        for(Pair p : list){
+            Log.i(TAG, "show: i=" + p.getIntval());
+        }
+
+        List<Pair> list2 = builder.filterB(getRadioSelect()).getList();
+        Log.i(TAG, "show: list2.size=" + list2.size());
+        for(Pair p : list2){
+            Log.i(TAG, "show: i2=" + p.getIntval());
+        }
+
+        List<Pair> list3 = builder.filterC(getSelect3()).getList();
+        Log.i(TAG, "show: list3.size=" + list3.size());
+        for(Pair p : list3){
+            Log.i(TAG, "show: i3=" + p.getIntval());
+        }
+
+        Log.i(TAG, "show: --------------------------------------------------------------");
+
+        ArrayList<Item> listData = builder.listData();
+        if(listData.size()==0) {
+            Toast.makeText(this, R.string.no_data_tip, Toast.LENGTH_LONG).show();
+        }else {
+            Log.i(TAG, "onStartClick: 打开列表窗口");
+            Intent listIntent = new Intent(this, MyListActivity.class);
+            listIntent.putExtra("data", listData);
+            startActivity(listIntent);
+        }
+    }
+
+    @Deprecated
     private List<Pair> mergePair(List<Byte> lista,List<Byte> listb,List<Byte> listc){
         List<Pair> retList = new ArrayList<Pair>(1000);
         for(byte a : lista) {
@@ -165,8 +245,18 @@ public class Main2Activity extends AppCompatActivity {
                 }
                 break;
             case 2:
+                for(Pair p : list){
+                    if(p.isType2()){
+                        retList.add(p);
+                    }
+                }
                 break;
             case 3:
+                for(Pair p : list){
+                    if(p.isType3()){
+                        retList.add(p);
+                    }
+                }
                 break;
             case 4:
                 break;
@@ -175,6 +265,7 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     private List<Byte> getList(CheckBox[] ckboxs){
+        //将用户选择转换为列表
         List<Byte> retList = new ArrayList<>();
         for(byte i=0;i< ckboxs.length;i++){
             if(ckboxs[i].isChecked()){
@@ -184,26 +275,37 @@ public class Main2Activity extends AppCompatActivity {
         return retList;
     }
 
-    class Pair{
-        byte a,b,c;
-        Pair(byte a1,byte b1,byte c1){
-            this.a = a1;
-            this.b = b1;
-            this.c = c1;
-        }
-
-        int getIntval(){
-            return a*100+b*10+c;
-        }
-        boolean isType0(){
-            return a==b && a==c;
-        }
-        boolean isType1(){
-            //顺子
-            byte max = a>b? (a>c? a : c) : (b>c? b : c);
-            byte min = a<b? (a<c? a : c) : (b<c? b : c);
-            byte mid = (byte) (a+b+c-max-min);
-            return min+1==mid && mid+1==max;
-        }
-    }
+//    class Pair{
+//        byte a,b,c;
+//        Pair(byte a1,byte b1,byte c1){
+//            this.a = a1;
+//            this.b = b1;
+//            this.c = c1;
+//        }
+//
+//        int getIntval(){
+//            return a*100+b*10+c;
+//        }
+//        boolean isType0(){
+//            return a==b && a==c;
+//        }
+//        boolean isType1(){
+//            //顺子
+//            byte max = a>b? (a>c? a : c) : (b>c? b : c);
+//            byte min = a<b? (a<c? a : c) : (b<c? b : c);
+//            byte mid = (byte) (a+b+c-max-min);
+//            return min+1==mid && mid+1==max;
+//        }
+//        boolean isType2(){
+//            //等差
+//            byte max = a>b? (a>c? a : c) : (b>c? b : c);
+//            byte min = a<b? (a<c? a : c) : (b<c? b : c);
+//            byte mid = (byte) (a+b+c-max-min);
+//            return (max-mid)==(mid-min);
+//        }
+//        boolean isType3(){
+//            //对子
+//            return a==b || a==c || b==c;
+//        }
+//    }
 }
